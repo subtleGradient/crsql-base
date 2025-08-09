@@ -41,18 +41,17 @@
             ripgrep
             gnumake
             
-            # For Cypress browser tests
-            xvfb-run
-            chromium
             
             # Platform-specific build tools
             pkg-config
-          ] ++ lib.optionals stdenv.isDarwin [
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             # macOS specific tools
             darwin.apple_sdk.frameworks.CoreServices
             darwin.apple_sdk.frameworks.Security
-          ] ++ lib.optionals stdenv.isLinux [
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
             # Linux specific tools for Cypress
+            xvfb-run
+            chromium
             gtk3
             nss
             nspr
@@ -91,7 +90,9 @@
             
             # Cypress browser configuration
             export CYPRESS_INSTALL_BINARY=0
-            export CYPRESS_RUN_BINARY=${pkgs.chromium}/bin/chromium
+            ${pkgs.lib.optionalString pkgs.stdenv.isLinux ''
+              export CYPRESS_RUN_BINARY=${pkgs.chromium}/bin/chromium
+            ''}
           '';
         };
       });
