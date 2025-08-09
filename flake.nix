@@ -99,6 +99,27 @@
             export CYPRESS_RUN_BINARY=${pkgs.chromium}/bin/chromium
           ''}
 
+          # Preserve existing Xcode setup on macOS
+          if [[ "${system}" == "aarch64-darwin" ]]; then
+            # Save current xcode-select path before Nix potentially overrides it
+            ORIGINAL_DEVELOPER_DIR=$(xcode-select -p 2>/dev/null || echo "")
+
+            # If we have a valid Xcode installation, preserve it
+            if [[ -d "/Applications/Xcode.app" ]] || [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
+              # Prefer user's Xcode-beta if it exists
+              if [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
+                export DEVELOPER_DIR="$HOME/Applications/Xcode-beta.app/Contents/Developer"
+              elif [[ -d "/Applications/Xcode.app" ]]; then
+                export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+              fi
+
+              # Put real Xcode tools first in PATH
+              export PATH="$DEVELOPER_DIR/usr/bin:$PATH"
+
+              echo "iOS Development: Using Xcode at $DEVELOPER_DIR"
+            fi
+          fi
+
           # Set up Ruby gem paths
           export GEM_HOME="$PWD/.gems"
           export GEM_PATH="$GEM_HOME"
