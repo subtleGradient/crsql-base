@@ -17,18 +17,9 @@ RUN bun install --frozen-lockfile --filter demos/expo-crsql-demo
 # Build-time env for Expo static replacement
 ARG EXPO_NO_TELEMETRY=1
 ENV EXPO_NO_TELEMETRY=$EXPO_NO_TELEMETRY
-# Example public var (add more ARG/ENV as needed)
-# ARG EXPO_PUBLIC_API_BASE_URL
-# ENV EXPO_PUBLIC_API_BASE_URL=$EXPO_PUBLIC_API_BASE_URL
 
 # Export the Expo web bundle from the workspace
-RUN bunx --bun --cwd demos/expo-crsql-demo \
-  expo export --platform web --output-dir dist
-
-# Optional: bundle the Bun server for faster startup
-# Adjust the path if your server entry lives elsewhere
-RUN bun build demos/expo-crsql-demo/server.ts \
-  --outdir=build --target=bun
+RUN cd demos/expo-crsql-demo; bun run build:web
 
 # ---- runtime: single Bun image serving static + API ----
 FROM oven/bun:1.2.19-alpine AS runtime

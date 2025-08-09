@@ -1,5 +1,5 @@
 import { serve } from "bun";
-import expoIndex from "../../dist/index.html";
+import expoIndex from "./.expo-web-build/index.html";
 import index from "./index.html";
 
 const server = serve({
