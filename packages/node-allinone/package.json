@@ -17,7 +17,7 @@
   "dependencies": {
     "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/xplat-api": "workspace:*",
-    "better-sqlite3": "^9.1.1"
+    "better-sqlite3": "^12.2.0"
   },
   "scripts": {
     "build": "tsc --build",

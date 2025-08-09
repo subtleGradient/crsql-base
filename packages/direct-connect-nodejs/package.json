@@ -32,7 +32,7 @@
     "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/direct-connect-common": "workspace:*",
     "@vlcn.io/xplat-api": "workspace:*",
-    "better-sqlite3": "^9.1.1",
+    "better-sqlite3": "^12.2.0",
     "chokidar": "^3.5.3",
     "throttle-debounce": "^5.0.0",
     "winston": "^3.10.0"
