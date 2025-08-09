@@ -21,5 +21,8 @@
     "database",
     "extension",
     "dylib"
-  ]
+  ],
+  "scripts": {
+    "test": "echo 'Platform package - no tests needed'"
+  }
 }

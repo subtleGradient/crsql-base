@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc --build",
     "watch": "tsc --build --watch",
-    "test": "echo no tests here yet",
+    "test": "vitest run",
     "rmtdata": "rm dbs-test/*",
     "deep-clean": "rm -rf ./dist || true && rm tsconfig.tsbuildinfo || true"
   },
@@ -27,5 +27,8 @@
     "@vlcn.io/crsqlite-wasm": "workspace:*",
     "@vlcn.io/xplat-api": "workspace:*",
     "@vlcn.io/rx-tbl": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   }
 }

@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "test": "bun test",
     "prepublishOnly": "bun run build"
   },
   "optionalDependencies": {

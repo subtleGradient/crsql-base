@@ -8,12 +8,12 @@ let customSQLiteSet = false;
 /**
  * Sets the bundled SQLite library for Bun's Database
  * Must be called before creating any Database instances
- * @returns The path to the SQLite library that was set
+ * @returns true if successfully set, false if already set
  */
-export function setBundledSQLite(): string {
+export function setBundledSQLite(): boolean {
   if (customSQLiteSet) {
     console.warn('setBundledSQLite() was already called. Skipping...');
-    return getSQLitePath();
+    return false;
   }
 
   const dylibPath = getSQLitePath();
@@ -30,7 +30,7 @@ export function setBundledSQLite(): string {
   customSQLiteSet = true;
   
   console.debug(`✅ Custom SQLite set: ${dylibPath}`);
-  return dylibPath;
+  return true;
 }
 
 /**
