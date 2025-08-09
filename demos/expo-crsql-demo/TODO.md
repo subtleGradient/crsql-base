@@ -2,11 +2,16 @@
 
 - [x] create expo app
 
-- [ ] add cr-sqlite stuff on the client side of the expo app
+- [ ] xplat db thing
+
+- [ ] db demo screen
   - [ ] cr-sqlite expo client web
   - [ ] cr-sqlite expo client iOS
   - [ ] cr-sqlite expo client Android
   - [ ] cr-sqlite expo server bun
+
+- [ ] add expo-updates
+  - [ ] fix the @op-engineering/op-sqlite expo-updates compat issue https://op-engineering.github.io/op-sqlite/docs/installation#expo-updates
 
 - [ ] Dockerfile
 - [ ] Kamal config
