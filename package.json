@@ -8,5 +8,14 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.26.1"
+  },
+  "name": "cr-sqlite-js",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }
