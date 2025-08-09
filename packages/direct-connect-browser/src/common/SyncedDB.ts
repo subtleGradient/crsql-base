@@ -1,12 +1,12 @@
-import { ISerializer, hexToBytes, tags } from "@vlcn.io/direct-connect-common";
+import { ISerializer, hexToBytes, tags } from "@vlcn.io-community/direct-connect-common";
 import { Endpoints, Port } from "../Types.js";
-import { DBID } from "@vlcn.io/xplat-api";
+import { DBID } from "@vlcn.io-community/xplat-api";
 import createDb, { DB } from "./DB.js";
 import InboundStream from "./InboundStream.js";
 import OutboundStream from "./OutboundStream.js";
 import Fetcher from "./Fetcher.js";
-import tblrx from "@vlcn.io/rx-tbl";
-import { UpdateType } from "@vlcn.io/xplat-api";
+import tblrx from "@vlcn.io-community/rx-tbl";
+import { UpdateType } from "@vlcn.io-community/xplat-api";
 
 export class SyncedDB {
   private readonly ports: Set<Port>;

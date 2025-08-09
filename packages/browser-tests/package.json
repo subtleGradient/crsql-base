@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/browser-tests",
+  "name": "@vlcn.io-community/browser-tests",
   "private": true,
   "version": "0.14.0",
   "type": "module",
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@vlcn.io/crsqlite-wasm": "workspace:*",
-    "@vlcn.io/xplat-tests": "workspace:*"
+    "@vlcn.io-community/xplat-tests": "workspace:*"
   },
   "devDependencies": {
     "@types/chai": "^5.2.2",

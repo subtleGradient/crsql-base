@@ -2,7 +2,7 @@ import { Config } from "../Types.js";
 import path from "path";
 import os from "os";
 import fs from "fs";
-import { bytesToHex } from "@vlcn.io/direct-connect-common";
+import { bytesToHex } from "@vlcn.io-community/direct-connect-common";
 
 const needsTouchHack = os.platform() === "darwin" || os.platform() === "win32";
 const ex = {

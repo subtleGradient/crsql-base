@@ -1,4 +1,4 @@
-import { DBAsync, DB as DBSync } from "@vlcn.io/xplat-api";
+import { DBAsync, DB as DBSync } from "@vlcn.io-community/xplat-api";
 type DB = DBAsync | DBSync;
 
 function createSimpleSchema(db: DB) {

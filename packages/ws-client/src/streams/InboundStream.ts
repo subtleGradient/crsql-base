@@ -3,7 +3,7 @@ import {
   bytesToHex,
   tags,
   greaterThanOrEqual,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import { Transport } from "../transport/Transport";
 import { DB } from "../DB";
 

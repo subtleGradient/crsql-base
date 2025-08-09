@@ -1,4 +1,4 @@
-import { wdbTests } from "@vlcn.io/xplat-tests";
+import { wdbTests } from "@vlcn.io-community/xplat-tests";
 import sqliteWasm from "@vlcn.io/crsqlite-wasm";
 
 // @ts-ignore

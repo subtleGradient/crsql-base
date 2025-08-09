@@ -1,5 +1,5 @@
-import { TblRx } from "@vlcn.io/rx-tbl";
-import { DBAsync, DB } from "@vlcn.io/xplat-api";
+import { TblRx } from "@vlcn.io-community/rx-tbl";
+import { DBAsync, DB } from "@vlcn.io-community/xplat-api";
 import { createContext, useContext } from "react";
 
 export type CtxAsync = {

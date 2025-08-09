@@ -1,4 +1,4 @@
-# CR-SQLite - @vlcn.io/xplat-api
+# CR-SQLite - @vlcn.io-community/xplat-api
 
 Cross-platform API for `sqlite` that works in both the browser and node/deno environments.
 

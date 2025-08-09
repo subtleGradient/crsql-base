@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/bun-sqlite-example",
+  "name": "@vlcn.io-community/bun-sqlite-example",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vlcn.io/crsqlite": "0.16.3",
-    "@vlcn.io/bun-sqlite-lib": "workspace:*"
+    "@vlcn.io-community/bun-sqlite-lib": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.2.19"

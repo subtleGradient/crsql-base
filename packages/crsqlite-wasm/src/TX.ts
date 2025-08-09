@@ -1,4 +1,4 @@
-import { StmtAsync, TXAsync } from "@vlcn.io/xplat-api";
+import { StmtAsync, TXAsync } from "@vlcn.io-community/xplat-api";
 import { Mutex } from "async-mutex";
 import { computeCacheKey } from "./cache.js";
 import { serialize, serializeTx } from "./serialize.js";

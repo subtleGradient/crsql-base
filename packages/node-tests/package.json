@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/nodeno-tests",
+  "name": "@vlcn.io-community/nodeno-tests",
   "type": "module",
   "version": "0.14.1",
   "files": [
@@ -26,9 +26,9 @@
   "dependencies": {
     "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/crsqlite-allinone": "workspace:*",
-    "@vlcn.io/rx-tbl": "workspace:*",
-    "@vlcn.io/xplat-api": "workspace:*",
-    "@vlcn.io/xplat-tests": "workspace:*",
+    "@vlcn.io-community/rx-tbl": "workspace:*",
+    "@vlcn.io-community/xplat-api": "workspace:*",
+    "@vlcn.io-community/xplat-tests": "workspace:*",
     "better-sqlite3": "^12.2.0",
     "fast-check": "^3.8.0",
     "nanoid": "^4.0.2"

@@ -3,9 +3,9 @@ import {
   RejectChanges,
   StartStreaming,
   encode,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import { WebSocket } from "ws";
-import { logger } from "@vlcn.io/logger-provider";
+import { logger } from "@vlcn.io-community/logger-provider";
 
 /**
  * Abstracts over the exact transport so we can swap out to any transport (http, websockets, tcp, etc) we want.

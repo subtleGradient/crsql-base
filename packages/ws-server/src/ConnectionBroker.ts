@@ -1,9 +1,9 @@
-import { Msg, decode, tags } from "@vlcn.io/ws-common";
+import { Msg, decode, tags } from "@vlcn.io-community/ws-common";
 import SyncConnection, { createSyncConnection } from "./SyncConnection.js";
 import DBCache from "./DBCache.js";
 import { WebSocket } from "ws";
 import Transport from "./Trasnport.js";
-import { logger } from "@vlcn.io/logger-provider";
+import { logger } from "@vlcn.io-community/logger-provider";
 
 export type Options = {
   ws: WebSocket;

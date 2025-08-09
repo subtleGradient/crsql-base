@@ -2,7 +2,7 @@ import { test, expect } from "vitest";
 import DB from "../DB.js";
 import fs from "node:fs";
 import { Config } from "../config.js";
-import { cryb64 } from "@vlcn.io/ws-common";
+import { cryb64 } from "@vlcn.io-community/ws-common";
 import DBFactory from "../DBFactory.js";
 
 test("db instantiation", async () => {

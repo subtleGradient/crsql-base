@@ -6,8 +6,8 @@ import {
   UpdateType,
   TXAsync,
   first,
-} from "@vlcn.io/xplat-api";
-export { first, firstPick, pick } from "@vlcn.io/xplat-api";
+} from "@vlcn.io-community/xplat-api";
+export { first, firstPick, pick } from "@vlcn.io-community/xplat-api";
 import { CtxAsync } from "./context.js";
 import { RowID } from "./rowid.js";
 import { Query } from "@vlcn.io/typed-sql";

@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/xplat-tests",
+  "name": "@vlcn.io-community/xplat-tests",
   "private": true,
   "type": "module",
   "version": "0.14.0",
@@ -24,9 +24,9 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/test/xplat-tests"
   },
   "dependencies": {
-    "@vlcn.io/rx-tbl": "workspace:*",
-    "@vlcn.io/sync-p2p": "workspace:*",
-    "@vlcn.io/xplat-api": "workspace:*",
+    "@vlcn.io-community/rx-tbl": "workspace:*",
+    "@vlcn.io-community/sync-p2p": "workspace:*",
+    "@vlcn.io-community/xplat-api": "workspace:*",
     "uuid": "^9.0.0"
   }
 }

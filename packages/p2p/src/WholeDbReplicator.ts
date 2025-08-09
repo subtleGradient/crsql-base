@@ -1,4 +1,4 @@
-import { DBAsync } from "@vlcn.io/xplat-api";
+import { DBAsync } from "@vlcn.io-community/xplat-api";
 import { parse as uuidParse, stringify as uuidStringify } from "uuid";
 export type SiteIDWire = string;
 export type SiteIDLocal = Uint8Array;

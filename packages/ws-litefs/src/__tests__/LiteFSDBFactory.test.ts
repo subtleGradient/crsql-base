@@ -1,9 +1,9 @@
 import { test, expect, vi, beforeAll } from "vitest";
 import { LiteFSDBFactory } from "../LiteFSDBFactory";
-import FSNotify from "@vlcn.io/ws-server/src/fs/FSNotify";
+import FSNotify from "@vlcn.io-community/ws-server/src/fs/FSNotify";
 import { config } from "./testServerConfig.js";
 import fs from "fs";
-import { tags } from "@vlcn.io/ws-common";
+import { tags } from "@vlcn.io-community/ws-common";
 
 beforeAll(() => {
   try {

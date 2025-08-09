@@ -11,7 +11,7 @@ import {
   DefaultConfig,
   ServiceDB,
   cryb64,
-} from "@vlcn.io/direct-connect-nodejs";
+} from "@vlcn.io-community/direct-connect-nodejs";
 import path from "path";
 
 const dir = "./src/schemas";

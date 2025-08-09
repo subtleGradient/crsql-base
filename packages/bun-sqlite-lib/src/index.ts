@@ -22,7 +22,7 @@ export function setBundledSQLite(): boolean {
     throw new Error(
       `SQLite library not found at ${dylibPath}. ` +
       `Make sure the platform-specific package is installed: ` +
-      `@vlcn.io/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`
+      `@vlcn.io-community/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`
     );
   }
 

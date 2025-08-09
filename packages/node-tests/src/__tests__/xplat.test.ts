@@ -1,7 +1,7 @@
 import "../fill.js";
 
 import { test, expect } from "vitest";
-import { DBAsync, DB as DBSync } from "@vlcn.io/xplat-api";
+import { DBAsync, DB as DBSync } from "@vlcn.io-community/xplat-api";
 type DB = DBAsync | DBSync;
 import crsqlite from "@vlcn.io/crsqlite-allinone";
 
@@ -22,12 +22,12 @@ function runTests(tests: {
   });
 }
 
-// import { wdbTests } from "@vlcn.io/xplat-tests";
+// import { wdbTests } from "@vlcn.io-community/xplat-tests";
 // runTests(wdbTests);
 
 // TODO: better-sqlite3 currently does not expose an udpate hook
-// import { tblrxTests } from "@vlcn.io/xplat-tests";
+// import { tblrxTests } from "@vlcn.io-community/xplat-tests";
 // runTests(tblrxTests);
 
-import { intTests } from "@vlcn.io/xplat-tests";
+import { intTests } from "@vlcn.io-community/xplat-tests";
 runTests(intTests);

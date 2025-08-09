@@ -1,8 +1,8 @@
-import { DBAsync } from "@vlcn.io/xplat-api";
-import wdbr, { PokeProtocol } from "@vlcn.io/sync-p2p";
+import { DBAsync } from "@vlcn.io-community/xplat-api";
+import wdbr, { PokeProtocol } from "@vlcn.io-community/sync-p2p";
 // @ts-ignore
 import { v4 as uuidv4, stringify as uuidStringify } from "uuid";
-import { Changeset } from "@vlcn.io/sync-p2p";
+import { Changeset } from "@vlcn.io-community/sync-p2p";
 
 type DB = DBAsync;
 

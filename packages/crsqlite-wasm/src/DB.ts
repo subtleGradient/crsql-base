@@ -5,7 +5,7 @@ import {
   UpdateType,
   cryb64,
   firstPick,
-} from "@vlcn.io/xplat-api";
+} from "@vlcn.io-community/xplat-api";
 import { SQLITE_UTF8 } from "@vlcn.io/wa-sqlite";
 import { serialize, topLevelMutex } from "./serialize.js";
 import Stmt from "./Stmt.js";

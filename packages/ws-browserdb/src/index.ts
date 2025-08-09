@@ -1,8 +1,8 @@
-import { DB } from "@vlcn.io/ws-client";
+import { DB } from "@vlcn.io-community/ws-client";
 import initWasm, { DB as WasmDB } from "@vlcn.io/crsqlite-wasm";
-import { Change } from "@vlcn.io/ws-common";
-import { StmtAsync, firstPick } from "@vlcn.io/xplat-api";
-import tblrx from "@vlcn.io/rx-tbl";
+import { Change } from "@vlcn.io-community/ws-common";
+import { StmtAsync, firstPick } from "@vlcn.io-community/xplat-api";
+import tblrx from "@vlcn.io-community/rx-tbl";
 
 const ENVIRONMENT_IS_WORKER = typeof importScripts === "function";
 

@@ -5,7 +5,7 @@ import WDB, {
   SiteIDWire,
   WholeDbReplicator,
 } from "./WholeDbReplicator.js";
-import { DB, DBAsync } from "@vlcn.io/xplat-api";
+import { DB, DBAsync } from "@vlcn.io-community/xplat-api";
 import Peer, { DataConnection } from "peerjs";
 // @ts-ignore
 import { stringify as uuidStringify } from "uuid";

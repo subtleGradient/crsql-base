@@ -1,4 +1,4 @@
-# @vlcn.io/ws-litefs
+# @vlcn.io-community/ws-litefs
 
 Alpha quality websocket support on LiteFS.
 

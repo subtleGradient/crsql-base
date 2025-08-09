@@ -3,7 +3,7 @@ import chokidar from "chokidar";
 import path from "path";
 import { Config } from "../config.js";
 import { collect } from "./collapser.js";
-import { logger } from "@vlcn.io/logger-provider";
+import { logger } from "@vlcn.io-community/logger-provider";
 
 /**
  * Notifies outbound streams of changes to the database file.

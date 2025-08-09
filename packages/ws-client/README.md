@@ -1,6 +1,6 @@
-# @vlcn.io/ws-client
+# @vlcn.io-community/ws-client
 
-A WebSocket client to do streaming database sync. Meant to be paired with the `@vlcn.io/ws-server` package or any server that speaks the same protocol.
+A WebSocket client to do streaming database sync. Meant to be paired with the `@vlcn.io-community/ws-server` package or any server that speaks the same protocol.
 
 Setup is pretty trivial as the `React` bindings support websocket sync. The [vlcn vite starter](https://github.com/vlcn-io/vite-starter) uses WebSocket sync as well.
 
@@ -13,10 +13,10 @@ The sync worker file will be loaded and run in its own worker thread. The config
 For web, the config looks like:
 
 ```ts
-import { Config, defaultConfig } from "@vlcn.io/ws-client";
-import { start } from "@vlcn.io/ws-client/worker.js";
+import { Config, defaultConfig } from "@vlcn.io-community/ws-client";
+import { start } from "@vlcn.io-community/ws-client/worker.js";
 // Interface to WASM sqlite
-import { createDbProvider } from "@vlcn.io/ws-browserdb";
+import { createDbProvider } from "@vlcn.io-community/ws-browserdb";
 
 export const config: Config = {
   dbProvider: createDbProvider(),

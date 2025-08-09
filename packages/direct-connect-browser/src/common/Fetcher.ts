@@ -1,5 +1,5 @@
 import { Endpoints } from "../Types.js";
-import { DBID } from "@vlcn.io/xplat-api";
+import { DBID } from "@vlcn.io-community/xplat-api";
 import {
   ApplyChangesMsg,
   ApplyChangesResponse,
@@ -13,7 +13,7 @@ import {
   GetLastSeenResponse,
   ISerializer,
   Msg,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 
 export type RetryConfig = {
   readonly retryCount: number;

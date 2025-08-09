@@ -1,5 +1,5 @@
-import { Config, IDBFactory } from "@vlcn.io/ws-server";
-import { IDB, internal } from "@vlcn.io/ws-server";
+import { Config, IDBFactory } from "@vlcn.io-community/ws-server";
+import { IDB, internal } from "@vlcn.io-community/ws-server";
 import {
   PrimaryConnection,
   createPrimaryConnection,

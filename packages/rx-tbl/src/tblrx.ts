@@ -16,7 +16,7 @@
 
 // exist (select 1 from pragma_function_list where name = 'crsql_tbl_rx')
 
-import { DB, DBAsync, UpdateType } from "@vlcn.io/xplat-api";
+import { DB, DBAsync, UpdateType } from "@vlcn.io-community/xplat-api";
 
 export type Src = "thisProcess" | "otherProcess";
 

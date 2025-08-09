@@ -7,7 +7,7 @@ import {
   decode,
   encode,
   tags,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 
 export default class WebSocketTransport implements Transport {
   #socket: WebSocket | null = null;

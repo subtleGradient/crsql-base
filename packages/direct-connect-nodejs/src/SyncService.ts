@@ -15,7 +15,7 @@ import {
   GetLastSeenResponse,
   UploadSchemaMsg,
   tags,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 import ServiceDB from "./private/ServiceDB.js";
 import FSNotify from "./private/FSNotify.js";
 import { Config } from "./Types.js";

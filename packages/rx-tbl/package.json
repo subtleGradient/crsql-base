@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/rx-tbl",
+  "name": "@vlcn.io-community/rx-tbl",
   "type": "module",
   "version": "0.15.0",
   "files": [
@@ -24,6 +24,6 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/rx-tbl"
   },
   "dependencies": {
-    "@vlcn.io/xplat-api": "workspace:*"
+    "@vlcn.io-community/xplat-api": "workspace:*"
   }
 }

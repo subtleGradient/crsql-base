@@ -6,8 +6,8 @@ import {
   ServiceDB,
   FSNotify,
   DefaultConfig,
-} from "@vlcn.io/direct-connect-nodejs";
-import { JsonSerializer } from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-nodejs";
+import { JsonSerializer } from "@vlcn.io-community/direct-connect-common";
 
 const PORT = parseInt(process.env.PORT || "8080");
 

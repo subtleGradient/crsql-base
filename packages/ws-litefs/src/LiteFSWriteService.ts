@@ -1,4 +1,4 @@
-import { Config, IDB, internal } from "@vlcn.io/ws-server";
+import { Config, IDB, internal } from "@vlcn.io-community/ws-server";
 import net from "net";
 import {
   Err,
@@ -10,8 +10,8 @@ import {
   decode,
   encode,
   tags,
-} from "@vlcn.io/ws-common";
-import DBCache from "@vlcn.io/ws-server/src/DBCache.js";
+} from "@vlcn.io-community/ws-common";
+import DBCache from "@vlcn.io-community/ws-server/src/DBCache.js";
 import { util } from "./internal/util.js";
 import logger from "./logger.js";
 

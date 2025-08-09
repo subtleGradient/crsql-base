@@ -1,4 +1,4 @@
-# @vlcn.io/rx-tbl
+# @vlcn.io-community/rx-tbl
 
 Simple "table based" reactivity.
 
@@ -9,10 +9,10 @@ Future `rx` packages will improve this to bring ractivity to the query level. I.
 # Usage:
 
 ```
-import tblrx from "@vlcn.io/rx-tbl";
+import tblrx from "@vlcn.io-community/rx-tbl";
 
-// db is a handle to the database. Implements `@vlcn.io/xplat-api`
-// E.g., `@vlcn.io/crsqlite-wasm` or `@vlcn.io/crsqlite-allinone`.
+// db is a handle to the database. Implements `@vlcn.io-community/xplat-api`
+// E.g., `@vlcn.io-community/crsqlite-wasm` or `@vlcn.io-community/crsqlite-allinone`.
 const rx = tblrx(db);
 
 const disposer = rx.on((modifiedTables: Set<string>) => {

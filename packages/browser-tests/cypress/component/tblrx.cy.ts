@@ -1,4 +1,4 @@
-import { tblrxTests } from "@vlcn.io/xplat-tests";
+import { tblrxTests } from "@vlcn.io-community/xplat-tests";
 import sqliteWasm from "@vlcn.io/crsqlite-wasm";
 
 // @ts-ignore

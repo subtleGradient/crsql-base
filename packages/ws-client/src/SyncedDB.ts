@@ -1,4 +1,4 @@
-import { tags } from "@vlcn.io/ws-common";
+import { tags } from "@vlcn.io-community/ws-common";
 import type { Config } from "./config.js";
 import InboundStream from "./streams/InboundStream.js";
 import OutboundStream from "./streams/OutboundStream.js";

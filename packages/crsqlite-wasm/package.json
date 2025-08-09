@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@vlcn.io/wa-sqlite": "^0.22.0",
-    "@vlcn.io/xplat-api": "workspace:*",
+    "@vlcn.io-community/xplat-api": "workspace:*",
     "async-mutex": "^0.5.0"
   }
 }

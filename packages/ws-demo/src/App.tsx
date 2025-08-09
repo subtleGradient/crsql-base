@@ -1,7 +1,7 @@
-import { useCachedState, useDB, useQuery, useSync } from "@vlcn.io/react";
+import { useCachedState, useDB, useQuery, useSync } from "@vlcn.io-community/react";
 import "./App.css";
 import randomWords from "./support/randomWords.js";
-import { DBAsync } from "@vlcn.io/xplat-api";
+import { DBAsync } from "@vlcn.io-community/xplat-api";
 import SyncWorker from "./worker.js?worker";
 
 type TestRecord = { id: string; name: string };

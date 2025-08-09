@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/logger-provider",
+  "name": "@vlcn.io-community/logger-provider",
   "type": "module",
   "version": "0.2.0",
   "files": [

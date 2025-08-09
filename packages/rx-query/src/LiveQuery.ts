@@ -1,4 +1,4 @@
-import { DBAsync, StmtAsync, TXAsync } from "@vlcn.io/xplat-api";
+import { DBAsync, StmtAsync, TXAsync } from "@vlcn.io-community/xplat-api";
 import RxDB from "./RxDB.js";
 
 // Globally pending live queries.

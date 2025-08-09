@@ -1,7 +1,7 @@
 import { createLiteFSWriteService } from "./LiteFSWriteService.js";
 
-import { Config as ServerConfig } from "@vlcn.io/ws-server";
-import { internal } from "@vlcn.io/ws-server";
+import { Config as ServerConfig } from "@vlcn.io-community/ws-server";
+import { internal } from "@vlcn.io-community/ws-server";
 import { createLiteFSDBFactory } from "./LiteFSDBFactory.js";
 import fs from "fs";
 

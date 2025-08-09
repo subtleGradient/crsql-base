@@ -1,4 +1,4 @@
-import { intTests } from "@vlcn.io/xplat-tests";
+import { intTests } from "@vlcn.io-community/xplat-tests";
 import sqliteWasm from "@vlcn.io/crsqlite-wasm";
 // @ts-ignore
 import wasmUrl from "@vlcn.io/crsqlite-wasm/crsqlite.wasm?url";

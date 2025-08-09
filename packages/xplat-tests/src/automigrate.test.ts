@@ -1,4 +1,4 @@
-import { DBAsync } from "@vlcn.io/xplat-api";
+import { DBAsync } from "@vlcn.io-community/xplat-api";
 type DB = DBAsync;
 
 // TODO: not xplat -- browser specific due to extra finalizae in automigrate

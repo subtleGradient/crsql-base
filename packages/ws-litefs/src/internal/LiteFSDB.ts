@@ -1,5 +1,5 @@
-import { Change } from "@vlcn.io/ws-common";
-import { IDB } from "@vlcn.io/ws-server";
+import { Change } from "@vlcn.io-community/ws-common";
+import { IDB } from "@vlcn.io-community/ws-server";
 import { PrimaryConnection } from "./PrimaryConnection.js";
 import logger from "../logger.js";
 import type BetterSqlite3 from "better-sqlite3";
