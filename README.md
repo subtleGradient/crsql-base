@@ -160,38 +160,38 @@ Running `make` in that directory will get you set up. Ensure you have the rust n
 
 ---
 
-|original package|new package? (maybe)|
+|status|original package|new package? (maybe)|
+|-|-|-|
+|unreleased |@vlcn.io/browser-tests           |@vlcn.io-community/browser-tests|
+|unreleased |@vlcn.io/crsqlite                |@vlcn.io-community/crsqlite|
+|unreleased |@vlcn.io/crsqlite-allinone       |@vlcn.io-community/crsqlite-allinone|
+|unreleased |@vlcn.io/crsqlite-wasm           |@vlcn.io-community/crsqlite-wasm|
+|unreleased |@vlcn.io/direct-connect-browser  |@vlcn.io-community/direct-connect-browser|
+|unreleased |@vlcn.io/direct-connect-common   |@vlcn.io-community/direct-connect-common|
+|unreleased |@vlcn.io/direct-connect-nodejs   |@vlcn.io-community/direct-connect-nodejs|
+|unreleased |@vlcn.io/id                      |@vlcn.io-community/id|
+|unreleased |@vlcn.io/logger-provider         |@vlcn.io-community/logger-provider|
+|unreleased |@vlcn.io/nodeno-tests            |@vlcn.io-community/nodeno-tests|
+|unreleased |@vlcn.io/py-correctness          |@vlcn.io-community/py-correctness|
+|unreleased |@vlcn.io/react                   |@vlcn.io-community/react|
+|unreleased |@vlcn.io/rx-query                |@vlcn.io-community/rx-query|
+|unreleased |@vlcn.io/rx-tbl                  |@vlcn.io-community/rx-tbl|
+|unreleased |@vlcn.io/sync-p2p                |@vlcn.io-community/sync-p2p|
+|unreleased |@vlcn.io/tsbuild-all             |@vlcn.io-community/tsbuild-all|
+|unreleased |@vlcn.io/wa-sqlite               |@vlcn.io-community/wa-sqlite|
+|unreleased |@vlcn.io/ws-browserdb            |@vlcn.io-community/ws-browserdb|
+|unreleased |@vlcn.io/ws-client               |@vlcn.io-community/ws-client|
+|unreleased |@vlcn.io/ws-common               |@vlcn.io-community/ws-common|
+|unreleased |@vlcn.io/ws-demo                 |@vlcn.io-community/ws-demo|
+|unreleased |@vlcn.io/ws-litefs               |@vlcn.io-community/ws-litefs|
+|unreleased |@vlcn.io/ws-server               |@vlcn.io-community/ws-server|
+|unreleased |@vlcn.io/xplat-api               |@vlcn.io-community/xplat-api|
+|unreleased |@vlcn.io/xplat-tests             |@vlcn.io-community/xplat-tests|
+
+
+|status|new package|
 |-|-|
-|@vlcn.io/browser-tests           |@vlcn.io-community/browser-tests|
-|@vlcn.io/crsqlite                |@vlcn.io-community/crsqlite|
-|@vlcn.io/crsqlite-allinone       |@vlcn.io-community/crsqlite-allinone|
-|@vlcn.io/crsqlite-wasm           |@vlcn.io-community/crsqlite-wasm|
-|@vlcn.io/direct-connect-browser  |@vlcn.io-community/direct-connect-browser|
-|@vlcn.io/direct-connect-common   |@vlcn.io-community/direct-connect-common|
-|@vlcn.io/direct-connect-nodejs   |@vlcn.io-community/direct-connect-nodejs|
-|@vlcn.io/id                      |@vlcn.io-community/id|
-|@vlcn.io/logger-provider         |@vlcn.io-community/logger-provider|
-|@vlcn.io/nodeno-tests            |@vlcn.io-community/nodeno-tests|
-|@vlcn.io/py-correctness          |@vlcn.io-community/py-correctness|
-|@vlcn.io/react                   |@vlcn.io-community/react|
-|@vlcn.io/rx-query                |@vlcn.io-community/rx-query|
-|@vlcn.io/rx-tbl                  |@vlcn.io-community/rx-tbl|
-|@vlcn.io/sync-p2p                |@vlcn.io-community/sync-p2p|
-|@vlcn.io/tsbuild-all             |@vlcn.io-community/tsbuild-all|
-|@vlcn.io/wa-sqlite               |@vlcn.io-community/wa-sqlite|
-|@vlcn.io/ws-browserdb            |@vlcn.io-community/ws-browserdb|
-|@vlcn.io/ws-client               |@vlcn.io-community/ws-client|
-|@vlcn.io/ws-common               |@vlcn.io-community/ws-common|
-|@vlcn.io/ws-demo                 |@vlcn.io-community/ws-demo|
-|@vlcn.io/ws-litefs               |@vlcn.io-community/ws-litefs|
-|@vlcn.io/ws-server               |@vlcn.io-community/ws-server|
-|@vlcn.io/xplat-api               |@vlcn.io-community/xplat-api|
-|@vlcn.io/xplat-tests             |@vlcn.io-community/xplat-tests|
-
-
-|new package|
-|-|
-|@vlcn.io-community/bun-sqlite-example|
-|@vlcn.io-community/bun-sqlite-lib|
-|@vlcn.io-community/libsqlite3-darwin-arm64|
-|@vlcn.io-community/libsqlite3-darwin-x64|
+|unreleased |@vlcn.io-community/bun-sqlite-example|
+|unreleased |@vlcn.io-community/bun-sqlite-lib|
+|unreleased |@vlcn.io-community/libsqlite3-darwin-arm64|
+|unreleased |@vlcn.io-community/libsqlite3-darwin-x64|
