@@ -130,3 +130,40 @@ git clone --recurse-submodules git@github.com:vlcn-io/workspace.git
 
 Running `make` in that directory will get you set up. Ensure you have the rust nightly toolchain installed and activated before running make.
 
+---
+
+|original package|new package? (maybe)|
+|-|-|
+|@vlcn.io/browser-tests           |@subtlegradient/vlcnio-browser-tests|
+|@vlcn.io/crsqlite                |@subtlegradient/vlcnio-crsqlite|
+|@vlcn.io/crsqlite-allinone       |@subtlegradient/vlcnio-crsqlite-allinone|
+|@vlcn.io/crsqlite-wasm           |@subtlegradient/vlcnio-crsqlite-wasm|
+|@vlcn.io/direct-connect-browser  |@subtlegradient/vlcnio-direct-connect-browser|
+|@vlcn.io/direct-connect-common   |@subtlegradient/vlcnio-direct-connect-common|
+|@vlcn.io/direct-connect-nodejs   |@subtlegradient/vlcnio-direct-connect-nodejs|
+|@vlcn.io/id                      |@subtlegradient/vlcnio-id|
+|@vlcn.io/logger-provider         |@subtlegradient/vlcnio-logger-provider|
+|@vlcn.io/nodeno-tests            |@subtlegradient/vlcnio-nodeno-tests|
+|@vlcn.io/py-correctness          |@subtlegradient/vlcnio-py-correctness|
+|@vlcn.io/react                   |@subtlegradient/vlcnio-react|
+|@vlcn.io/rx-query                |@subtlegradient/vlcnio-rx-query|
+|@vlcn.io/rx-tbl                  |@subtlegradient/vlcnio-rx-tbl|
+|@vlcn.io/sync-p2p                |@subtlegradient/vlcnio-sync-p2p|
+|@vlcn.io/tsbuild-all             |@subtlegradient/vlcnio-tsbuild-all|
+|@vlcn.io/wa-sqlite               |@subtlegradient/vlcnio-wa-sqlite|
+|@vlcn.io/ws-browserdb            |@subtlegradient/vlcnio-ws-browserdb|
+|@vlcn.io/ws-client               |@subtlegradient/vlcnio-ws-client|
+|@vlcn.io/ws-common               |@subtlegradient/vlcnio-ws-common|
+|@vlcn.io/ws-demo                 |@subtlegradient/vlcnio-ws-demo|
+|@vlcn.io/ws-litefs               |@subtlegradient/vlcnio-ws-litefs|
+|@vlcn.io/ws-server               |@subtlegradient/vlcnio-ws-server|
+|@vlcn.io/xplat-api               |@subtlegradient/vlcnio-xplat-api|
+|@vlcn.io/xplat-tests             |@subtlegradient/vlcnio-xplat-tests|
+
+
+|new package|
+|-|
+|@subtlegradient/bun-sqlite-example|
+|@subtlegradient/bun-sqlite-lib|
+|@subtlegradient/libsqlite3-darwin-arm64|
+|@subtlegradient/libsqlite3-darwin-x64|
