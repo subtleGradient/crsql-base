@@ -2,3 +2,4 @@
 - [ ] update README with a reason why this fork exists
 - [ ] The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
 - [ ] add an Expo React Native demo
+- [ ] add another server demo and publish it
