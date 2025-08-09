@@ -5,7 +5,10 @@ const makePathsRelative = (html: string) =>
 	html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
 
 async function buildExpoWeb({ destination }: { destination: BunFile }) {
-	if (await destination.exists()) await $`rm -rf ${destination}`.nothrow();
+	if (!(await destination.stat().then((it) => it.isDirectory())))
+		throw new Error(
+			`Destination directory ${destination.name} must exist, but it does not.`,
+		);
 
 	await $`expo export --platform web --output-dir ${destination} --no-minify --no-bytecode --dump-assetmap`;
 
@@ -16,7 +19,11 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 }
 
 async function buildBunServer({ destination }: { destination: BunFile }) {
-	if (await destination.exists()) await $`rm -rf ${destination}`.nothrow();
+	if (!(await destination.stat().then((it) => it.isDirectory())))
+		throw new Error(
+			`Destination directory ${destination.name} must exist, but it does not.`,
+		);
+
 	const result = await Bun.build({
 		define: {
 			"process.env.NODE_ENV": JSON.stringify("production"),
@@ -38,11 +45,32 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 	console.table(outputTable);
 }
 
-async function main() {
-	await buildExpoWeb({
-		destination: file(`${import.meta.dir}/server/src/.expo-web-build`),
+export const __DEV__ = process.env.NODE_ENV !== "production";
+
+export const expoWebBuildRootPath = __DEV__
+	? `${import.meta.dir}/build/expo`
+	: `${import.meta.dir}/expo`;
+
+if (
+	!(await file(expoWebBuildRootPath)
+		.stat()
+		.then((it) => it.isDirectory()))
+)
+	throw new Error(`DEFECT: Expo web build root must exist, but it does not`, {
+		cause: expoWebBuildRootPath,
 	});
-	// await buildBunServer({ destination: file(`${import.meta.dir}/build/`) });
+
+export default main;
+async function main() {
+	const buildRoot = file(`${import.meta.dir}/build`);
+	const expoWebBuildRoot = file(expoWebBuildRootPath);
+
+	await $`rm -rf ${buildRoot}`.nothrow();
+	await $`mkdir ${buildRoot}`.nothrow();
+	await $`mkdir ${expoWebBuildRoot}`.nothrow();
+
+	await buildExpoWeb({ destination: expoWebBuildRoot });
+	await buildBunServer({ destination: buildRoot });
 }
 
 if (import.meta.main) await main();
