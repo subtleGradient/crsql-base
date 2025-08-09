@@ -1,0 +1,48 @@
+{
+  "name": "@vlcn.io/bun-sqlite-lib",
+  "version": "0.1.0",
+  "description": "SQLite library loader for Bun with extension support",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlcn-io/cr-sqlite-js.git",
+    "directory": "packages/bun-sqlite-lib"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "bun run build"
+  },
+  "optionalDependencies": {
+    "@vlcn.io/libsqlite3-darwin-arm64": "3.47.2",
+    "@vlcn.io/libsqlite3-darwin-x64": "3.47.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.19",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.9.2"
+  },
+  "keywords": [
+    "sqlite",
+    "sqlite3",
+    "bun",
+    "database",
+    "extension",
+    "loader"
+  ],
+  "bin": {
+    "sqlite-path": "./dist/bin/sqlite-path.js"
+  }
+}

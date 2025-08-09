@@ -1,0 +1,16 @@
+{
+  "name": "@vlcn.io/bun-sqlite-example",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@vlcn.io/crsqlite": "0.16.3",
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.19"
+  }
+}

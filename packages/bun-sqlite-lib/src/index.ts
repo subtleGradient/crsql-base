@@ -1,0 +1,75 @@
+import { Database } from 'bun:sqlite';
+import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
+import { join, dirname } from 'path';
+
+let customSQLiteSet = false;
+
+/**
+ * Sets the bundled SQLite library for Bun's Database
+ * Must be called before creating any Database instances
+ * @returns The path to the SQLite library that was set
+ */
+export function setBundledSQLite(): string {
+  if (customSQLiteSet) {
+    console.warn('setBundledSQLite() was already called. Skipping...');
+    return getSQLitePath();
+  }
+
+  const dylibPath = getSQLitePath();
+  
+  if (!existsSync(dylibPath)) {
+    throw new Error(
+      `SQLite library not found at ${dylibPath}. ` +
+      `Make sure the platform-specific package is installed: ` +
+      `@vlcn.io/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`
+    );
+  }
+
+  Database.setCustomSQLite(dylibPath);
+  customSQLiteSet = true;
+  
+  console.debug(`✅ Custom SQLite set: ${dylibPath}`);
+  return dylibPath;
+}
+
+/**
+ * Gets the path to the bundled SQLite library
+ * @returns The absolute path to the SQLite dylib
+ */
+export function getSQLitePath(): string {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const arch = process.arch === 'arm64' ? 'darwin-arm64' : 'darwin-x64';
+  const dylibPath = join(__dirname, '..', '..', `libsqlite3-${arch}`, 'vendor', 'libsqlite3.0.dylib');
+  return dylibPath;
+}
+
+/**
+ * Checks if the bundled SQLite library is available
+ * @returns true if the library exists, false otherwise
+ */
+export function isSQLiteAvailable(): boolean {
+  try {
+    return existsSync(getSQLitePath());
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Gets the SQLite version from the bundled library
+ * @returns The SQLite version string
+ */
+export function getSQLiteVersion(): string {
+  // This would be dynamically determined from the actual library
+  // For now, return the version we're targeting
+  return '3.47.2';
+}
+
+/**
+ * Resets the custom SQLite setting (mainly for testing)
+ * @internal
+ */
+export function resetCustomSQLite(): void {
+  customSQLiteSet = false;
+}

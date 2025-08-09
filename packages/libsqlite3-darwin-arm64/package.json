@@ -1,0 +1,25 @@
+{
+  "name": "@vlcn.io/libsqlite3-darwin-arm64",
+  "version": "3.47.2",
+  "description": "Prebuilt SQLite 3.47.2 with extension loading enabled for macOS ARM64",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlcn-io/cr-sqlite-js.git",
+    "directory": "packages/libsqlite3-darwin-arm64"
+  },
+  "license": "MIT",
+  "os": ["darwin"],
+  "cpu": ["arm64"],
+  "files": [
+    "vendor/",
+    "LICENSE.sqlite"
+  ],
+  "keywords": [
+    "sqlite",
+    "sqlite3",
+    "bun",
+    "database",
+    "extension",
+    "dylib"
+  ]
+}

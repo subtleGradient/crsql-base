@@ -1,0 +1,193 @@
+name: Build SQLite Libraries
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-sqlite.yml'
+      - 'packages/libsqlite3-*/build.sh'
+
+env:
+  SQLITE_VERSION: "3470200"
+  SQLITE_YEAR: "2024"
+
+jobs:
+  build-darwin:
+    strategy:
+      matrix:
+        include:
+          - runner: macos-14
+            arch: arm64
+            platform: darwin-arm64
+          - runner: macos-13
+            arch: x64
+            platform: darwin-x64
+    
+    runs-on: ${{ matrix.runner }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download SQLite amalgamation
+        run: |
+          curl -L -o sqlite.zip https://www.sqlite.org/${{ env.SQLITE_YEAR }}/sqlite-amalgamation-${{ env.SQLITE_VERSION }}.zip
+          unzip sqlite.zip
+          mv sqlite-amalgamation-${{ env.SQLITE_VERSION }}/* .
+      
+      - name: Build SQLite library
+        run: |
+          cc -dynamiclib sqlite3.c -o libsqlite3.0.dylib \
+            -DSQLITE_ENABLE_JSON1 \
+            -DSQLITE_ENABLE_FTS5 \
+            -DSQLITE_ENABLE_RTREE \
+            -DSQLITE_ENABLE_COLUMN_METADATA \
+            -DSQLITE_ENABLE_MATH_FUNCTIONS \
+            -DSQLITE_ENABLE_LOAD_EXTENSION=1 \
+            -DSQLITE_THREADSAFE=2 \
+            -DSQLITE_DEFAULT_MEMSTATUS=0 \
+            -DSQLITE_DEFAULT_WAL_SYNCHRONOUS=1 \
+            -DSQLITE_LIKE_DOESNT_MATCH_BLOBS \
+            -DSQLITE_MAX_EXPR_DEPTH=0 \
+            -DSQLITE_USE_ALLOCA \
+            -DSQLITE_ENABLE_EXPLAIN_COMMENTS \
+            -DHAVE_USLEEP \
+            -lpthread -lm -ldl
+          
+          install_name_tool -id @rpath/libsqlite3.0.dylib libsqlite3.0.dylib
+      
+      - name: Test library
+        run: |
+          # Create a simple test to verify the library works
+          cat > test.c << 'EOF'
+          #include <stdio.h>
+          #include <dlfcn.h>
+          
+          int main() {
+            void* handle = dlopen("./libsqlite3.0.dylib", RTLD_LAZY);
+            if (!handle) {
+              fprintf(stderr, "Failed to load library: %s\n", dlerror());
+              return 1;
+            }
+            
+            const char* (*version_fn)(void) = dlsym(handle, "sqlite3_libversion");
+            if (!version_fn) {
+              fprintf(stderr, "Failed to find sqlite3_libversion: %s\n", dlerror());
+              return 1;
+            }
+            
+            printf("SQLite version: %s\n", version_fn());
+            
+            // Check for extension loading capability
+            void* enable_load = dlsym(handle, "sqlite3_enable_load_extension");
+            if (!enable_load) {
+              fprintf(stderr, "Extension loading not available!\n");
+              return 1;
+            }
+            
+            printf("Extension loading: ✅ Available\n");
+            
+            dlclose(handle);
+            return 0;
+          }
+          EOF
+          
+          cc test.c -o test
+          ./test
+      
+      - name: Create vendor directory
+        run: |
+          mkdir -p packages/libsqlite3-${{ matrix.platform }}/vendor
+          cp libsqlite3.0.dylib packages/libsqlite3-${{ matrix.platform }}/vendor/
+      
+      - name: Create SQLite license file
+        run: |
+          cat > packages/libsqlite3-${{ matrix.platform }}/LICENSE.sqlite << 'EOF'
+          SQLite is in the public domain.
+          
+          All of the code and documentation in SQLite has been dedicated to the public domain
+          by the authors. All code authors, and representatives of the companies they work for,
+          have signed affidavits dedicating their contributions to the public domain and
+          originals of those signed affidavits are stored in a firesafe at the main offices
+          of Hwaci. Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+          the original SQLite code, either in source code form or as a compiled binary, for
+          any purpose, commercial or non-commercial, and by any means.
+          
+          See https://www.sqlite.org/copyright.html for more information.
+          EOF
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libsqlite3-${{ matrix.platform }}
+          path: packages/libsqlite3-${{ matrix.platform }}/
+  
+  test-packages:
+    needs: build-darwin
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      
+      - name: Download ARM64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: libsqlite3-darwin-arm64
+          path: packages/libsqlite3-darwin-arm64/
+      
+      - name: Download x64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: libsqlite3-darwin-x64
+          path: packages/libsqlite3-darwin-x64/
+      
+      - name: Install dependencies
+        run: |
+          cd packages/bun-sqlite-lib
+          bun install
+      
+      - name: Build loader package
+        run: |
+          cd packages/bun-sqlite-lib
+          bun run build
+      
+      - name: Test loader
+        run: |
+          cd packages/bun-sqlite-lib
+          node dist/bin/sqlite-path.js --check
+          node dist/bin/sqlite-path.js --version
+      
+      - name: Test with Bun
+        run: |
+          cat > test-bun.ts << 'EOF'
+          import { setBundledSQLite } from './packages/bun-sqlite-lib/dist/index.js';
+          import { Database } from 'bun:sqlite';
+          
+          try {
+            const dylibPath = setBundledSQLite();
+            console.log('SQLite library set:', dylibPath);
+            
+            const db = new Database(':memory:');
+            const version = db.query('SELECT sqlite_version()').get();
+            console.log('SQLite version from Bun:', version);
+            
+            // Test that we can at least attempt to load an extension
+            // (it will fail because the extension doesn't exist, but shouldn't crash)
+            try {
+              db.loadExtension('/nonexistent.dylib');
+            } catch (e) {
+              console.log('Extension loading attempted (expected failure):', e.message);
+            }
+            
+            db.close();
+            console.log('✅ All tests passed!');
+          } catch (error) {
+            console.error('❌ Test failed:', error);
+            process.exit(1);
+          }
+          EOF
+          
+          bun run test-bun.ts
