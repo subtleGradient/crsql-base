@@ -20,7 +20,7 @@ export default class InboundStream {
 
   private inflightWrite: Promise<void> | null = null;
   private pendingWrites: StreamingChangesMsg[] = [];
-  private restartHandle: number | null = null;
+  private restartHandle: ReturnType<typeof setTimeout> | null = null;
   private errCount = 0;
 
   constructor(

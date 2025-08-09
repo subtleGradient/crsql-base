@@ -57,7 +57,7 @@ export default function DBProvider({
     };
   }, [dbname, schema, contextRef.useDb]);
   if (dbRef === null || dbFactory.getHook(dbname) == null) {
-    return <>{fallback}</> ?? <div>Creating DB {dbname}</div>;
+    return <>{fallback || <div>Creating DB {dbname}</div>}</>;
   }
   return (
     <DbAvailable ctx={dbRef} DBContext={contextRef.DBContext}>

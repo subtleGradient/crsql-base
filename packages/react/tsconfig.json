@@ -10,7 +10,6 @@
   "references": [
     { "path": "../xplat-api" },
     { "path": "../rx-tbl" },
-    { "path": "../ws-client" },
-    { "path": "../../../typed-sql/packages/typed-sql" }
+    { "path": "../ws-client" }
   ]
 }

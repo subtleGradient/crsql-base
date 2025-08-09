@@ -8,7 +8,7 @@ export default class OutboundStream {
   #lastSent: readonly [bigint, number] | null = null;
   #excludeSites: readonly Uint8Array[] = [];
   #localOnly: boolean = false;
-  #timeoutHandle: number | null = null;
+  #timeoutHandle: ReturnType<typeof setTimeout> | null = null;
   #bufferFullBackoff = 50;
   readonly #disposer;
 

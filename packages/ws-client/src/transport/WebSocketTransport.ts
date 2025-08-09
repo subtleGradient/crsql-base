@@ -15,7 +15,7 @@ export default class WebSocketTransport implements Transport {
   #closed = false;
   #options;
   #onReady: (() => void) | null = null;
-  #keepAliveInterval: number | null = null;
+  #keepAliveInterval: ReturnType<typeof setInterval> | null = null;
 
   constructor(options: TransporOptions) {
     this.#options = options;
