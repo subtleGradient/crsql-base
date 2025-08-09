@@ -44,6 +44,31 @@ db.loadExtension(extensionPath);
 db.close();
 ```
 
+## Bun:sqlite
+
+```ts
+import { Database } from "bun:sqlite";
+import { setCustomSQLite } from "@vlcn.io/bun-sqlite-lib";
+import { extensionPath } from "@vlcn.io/crsqlite";
+
+// Required on macOS to use a SQLite build with extension support
+// No-op on other platforms
+setCustomSQLite();
+
+const db = new Database(":memory:");
+db.loadExtension(extensionPath);
+
+// Use cr-sqlite features
+db.exec("SELECT crsql_as_crr('my_table')");
+
+// Run queries
+const todos = db.query("SELECT * FROM my_table").all();
+
+...
+
+db.close();
+```
+
 ## React
 
 ```ts
@@ -134,36 +159,36 @@ Running `make` in that directory will get you set up. Ensure you have the rust n
 
 |original package|new package? (maybe)|
 |-|-|
-|@vlcn.io/browser-tests           |@subtlegradient/vlcnio-browser-tests|
-|@vlcn.io/crsqlite                |@subtlegradient/vlcnio-crsqlite|
-|@vlcn.io/crsqlite-allinone       |@subtlegradient/vlcnio-crsqlite-allinone|
-|@vlcn.io/crsqlite-wasm           |@subtlegradient/vlcnio-crsqlite-wasm|
-|@vlcn.io/direct-connect-browser  |@subtlegradient/vlcnio-direct-connect-browser|
-|@vlcn.io/direct-connect-common   |@subtlegradient/vlcnio-direct-connect-common|
-|@vlcn.io/direct-connect-nodejs   |@subtlegradient/vlcnio-direct-connect-nodejs|
-|@vlcn.io/id                      |@subtlegradient/vlcnio-id|
-|@vlcn.io/logger-provider         |@subtlegradient/vlcnio-logger-provider|
-|@vlcn.io/nodeno-tests            |@subtlegradient/vlcnio-nodeno-tests|
-|@vlcn.io/py-correctness          |@subtlegradient/vlcnio-py-correctness|
-|@vlcn.io/react                   |@subtlegradient/vlcnio-react|
-|@vlcn.io/rx-query                |@subtlegradient/vlcnio-rx-query|
-|@vlcn.io/rx-tbl                  |@subtlegradient/vlcnio-rx-tbl|
-|@vlcn.io/sync-p2p                |@subtlegradient/vlcnio-sync-p2p|
-|@vlcn.io/tsbuild-all             |@subtlegradient/vlcnio-tsbuild-all|
-|@vlcn.io/wa-sqlite               |@subtlegradient/vlcnio-wa-sqlite|
-|@vlcn.io/ws-browserdb            |@subtlegradient/vlcnio-ws-browserdb|
-|@vlcn.io/ws-client               |@subtlegradient/vlcnio-ws-client|
-|@vlcn.io/ws-common               |@subtlegradient/vlcnio-ws-common|
-|@vlcn.io/ws-demo                 |@subtlegradient/vlcnio-ws-demo|
-|@vlcn.io/ws-litefs               |@subtlegradient/vlcnio-ws-litefs|
-|@vlcn.io/ws-server               |@subtlegradient/vlcnio-ws-server|
-|@vlcn.io/xplat-api               |@subtlegradient/vlcnio-xplat-api|
-|@vlcn.io/xplat-tests             |@subtlegradient/vlcnio-xplat-tests|
+|@vlcn.io/browser-tests           |@vlcn.io-community/browser-tests|
+|@vlcn.io/crsqlite                |@vlcn.io-community/crsqlite|
+|@vlcn.io/crsqlite-allinone       |@vlcn.io-community/crsqlite-allinone|
+|@vlcn.io/crsqlite-wasm           |@vlcn.io-community/crsqlite-wasm|
+|@vlcn.io/direct-connect-browser  |@vlcn.io-community/direct-connect-browser|
+|@vlcn.io/direct-connect-common   |@vlcn.io-community/direct-connect-common|
+|@vlcn.io/direct-connect-nodejs   |@vlcn.io-community/direct-connect-nodejs|
+|@vlcn.io/id                      |@vlcn.io-community/id|
+|@vlcn.io/logger-provider         |@vlcn.io-community/logger-provider|
+|@vlcn.io/nodeno-tests            |@vlcn.io-community/nodeno-tests|
+|@vlcn.io/py-correctness          |@vlcn.io-community/py-correctness|
+|@vlcn.io/react                   |@vlcn.io-community/react|
+|@vlcn.io/rx-query                |@vlcn.io-community/rx-query|
+|@vlcn.io/rx-tbl                  |@vlcn.io-community/rx-tbl|
+|@vlcn.io/sync-p2p                |@vlcn.io-community/sync-p2p|
+|@vlcn.io/tsbuild-all             |@vlcn.io-community/tsbuild-all|
+|@vlcn.io/wa-sqlite               |@vlcn.io-community/wa-sqlite|
+|@vlcn.io/ws-browserdb            |@vlcn.io-community/ws-browserdb|
+|@vlcn.io/ws-client               |@vlcn.io-community/ws-client|
+|@vlcn.io/ws-common               |@vlcn.io-community/ws-common|
+|@vlcn.io/ws-demo                 |@vlcn.io-community/ws-demo|
+|@vlcn.io/ws-litefs               |@vlcn.io-community/ws-litefs|
+|@vlcn.io/ws-server               |@vlcn.io-community/ws-server|
+|@vlcn.io/xplat-api               |@vlcn.io-community/xplat-api|
+|@vlcn.io/xplat-tests             |@vlcn.io-community/xplat-tests|
 
 
 |new package|
 |-|
-|@subtlegradient/bun-sqlite-example|
-|@subtlegradient/bun-sqlite-lib|
-|@subtlegradient/libsqlite3-darwin-arm64|
-|@subtlegradient/libsqlite3-darwin-x64|
+|@vlcn.io-community/bun-sqlite-example|
+|@vlcn.io-community/bun-sqlite-lib|
+|@vlcn.io-community/libsqlite3-darwin-arm64|
+|@vlcn.io-community/libsqlite3-darwin-x64|
