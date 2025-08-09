@@ -69,38 +69,56 @@ See official docs or the `vite-starter`
 
 # Packages
 
-## Storage
+## Core Storage
 
-- [crsqlite](https://github.com/vlcn-io/js): The cr-sqlite loadable extension for use in NodeJS/Deno/Bun. Can be used with the SQLite bindings you currently use.
-- [crsqlite-wasm](./packages/crsqlite-wasm): WASM build of CR-SQLite & SQLite for use in the browser.
+- **@vlcn.io/crsqlite-allinone** (`node-allinone`) - CR-SQLite loadable extension with bundled SQLite for Node.js/Deno
+- **@vlcn.io/crsqlite-wasm** - WASM build of CR-SQLite & SQLite for browser environments
+- **@vlcn.io/bun-sqlite-lib** - SQLite library loader for Bun with extension support
+- **@vlcn.io/libsqlite3-darwin-arm64** - Prebuilt SQLite 3.47.2 for macOS ARM64 (Node.js/Bun)
+- **@vlcn.io/libsqlite3-darwin-x64** - Prebuilt SQLite 3.47.2 for macOS x64 (Node.js/Bun)
 
-## Sync
+## Sync & Networking
 
-- [client-websocket](./packages/ws-client): Websocket client to sync the browser's database to a database hosted on a websocket server.
-- [server-websocket](./packages/ws-server): Websocket server implementation.
-- [Websocket Demo](./packages/ws-demo)
-- HTTP GET & Server Sent Events: https://github.com/vlcn-io/vite-starter
-- p2p: A peer to peer networking implementation, based on webrtc
+### WebSocket
+- **@vlcn.io/ws-client** - WebSocket client for browser-to-server database sync (Browser)
+- **@vlcn.io/ws-server** - WebSocket sync server implementation (Node.js)
+- **@vlcn.io/ws-common** - Shared WebSocket protocol code (Node.js/Browser)
+- **@vlcn.io/ws-browserdb** - Browser database interface for WebSocket sync (Browser)
+- **@vlcn.io/ws-litefs** - LiteFS integration for WebSocket sync (Node.js)
+- **@vlcn.io/ws-demo** - WebSocket sync demo application (Browser/React)
 
-## UI
+### Direct Connection
+- **@vlcn.io/direct-connect-browser** - Direct connection sync for browser (Browser)
+- **@vlcn.io/direct-connect-nodejs** - Direct connection sync for Node.js (Node.js)
+- **@vlcn.io/direct-connect-common** - Shared direct connection code (Node.js/Browser)
 
-- [react](./packages/react): React hooks for driving UI state from database queries
+### P2P
+- **@vlcn.io/sync-p2p** - Peer-to-peer sync implementation using WebRTC (Browser)
 
-## Other
+## UI Integration
 
-- [xplat-api](./packages/xplat-api): interfaces for components that can exist in NodeJS or the Browser.
-- [client-core](./packages/client-core): Networking code that is common across all client implementations
-- [client-server-common](./packages/client-server-common): Networking code that is common to the client and server
-- [server-core](./packages/server-core): Network code that is common across all server implementations
-- [node-allinone](./packages/node-allinone): convenience package for loading and using crsqlite in nodejs
-  - Can also be used as a run time loadable extension in `nodejs` with whatever `sqlite` bindings you already use. See the `node-allinone` readme for more details
-- [tsbuild-all](./tsbuild-all): convenient package for building all other packages
+- **@vlcn.io/react** - React hooks for reactive database queries (React)
+- **@vlcn.io/rx-query** - Query AST and reactive query infrastructure (Browser/Node.js)
+- **@vlcn.io/rx-tbl** - Simple table-based reactivity (Browser/Node.js)
 
-## Integration Tests
+## Cross-Platform & Utilities
 
-- node-tests:
-- xplat-tests:
-- browser-tests:
+- **@vlcn.io/xplat-api** - Cross-platform SQLite API for browser and Node.js environments
+- **@vlcn.io/id** - ID generation utilities (Browser/Node.js)
+- **@vlcn.io/logger-provider** - Logging infrastructure (Browser/Node.js)
+
+## Testing
+
+- **@vlcn.io/browser-tests** - Browser-specific test suite using Cypress (Browser)
+- **@vlcn.io/nodeno-tests** - Node.js specific test suite (Node.js)
+- **@vlcn.io/xplat-tests** - Cross-platform test suite (Node.js/Browser)
+
+## Examples & Development
+
+- **@vlcn.io/bun-sqlite-example** - Example using CR-SQLite with Bun runtime (Bun)
+- **@vlcn.io/tsbuild-all** - Build orchestration for all TypeScript packages (Development)
+- **sandbox** - Playground for bug reproductions (Browser/React)
+- **sandbox-node** - Node.js playground for testing (Node.js)
 
 # Contributing
 
