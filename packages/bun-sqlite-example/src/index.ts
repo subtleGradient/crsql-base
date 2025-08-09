@@ -1,8 +1,10 @@
+import { setBundledSQLite } from "@vlcn.io/bun-sqlite-lib";
 import { Database } from "bun:sqlite";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
-Database.setCustomSQLite('')
+// Set the custom SQLite library with extension support
+setBundledSQLite();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,14 +21,10 @@ const db2 = new Database(":memory:");
 db1.loadExtension(extensionPath);
 db2.loadExtension(extensionPath);
 
-// Initialize cr-sqlite on both databases
-db1.exec("SELECT crsql_as_crr('todos')");
-db2.exec("SELECT crsql_as_crr('todos')");
-
 // Create a todos table on both databases
 const createTable = `
   CREATE TABLE IF NOT EXISTS todos (
-    id TEXT PRIMARY KEY,
+    id TEXT PRIMARY KEY NOT NULL,
     title TEXT,
     completed INTEGER DEFAULT 0
   )
@@ -34,6 +32,10 @@ const createTable = `
 
 db1.exec(createTable);
 db2.exec(createTable);
+
+// Initialize cr-sqlite on both databases (make tables CRDTs)
+db1.exec("SELECT crsql_as_crr('todos')");
+db2.exec("SELECT crsql_as_crr('todos')");
 
 // Get site IDs for each database
 const siteId1 = db1.query("SELECT crsql_site_id()").get() as { "crsql_site_id()": Uint8Array };

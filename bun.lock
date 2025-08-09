@@ -36,6 +36,7 @@
       "name": "@vlcn.io/bun-sqlite-example",
       "version": "0.1.0",
       "dependencies": {
+        "@vlcn.io/bun-sqlite-lib": "workspace:*",
         "@vlcn.io/crsqlite": "0.16.3",
       },
       "devDependencies": {

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vlcn.io/crsqlite": "0.16.3",
+    "@vlcn.io/bun-sqlite-lib": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.2.19"
