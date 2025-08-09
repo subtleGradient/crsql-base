@@ -72,7 +72,7 @@ class EstablishedConnection {
         `failed to generate a return value for msg type ${msg._tag}`
       );
     }
-    this.#conn.write(encode(ret), (err?: Error) => {
+    this.#conn.write(encode(ret), (err?: Error | null) => {
       if (err) {
         console.error(err);
       }
