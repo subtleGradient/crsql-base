@@ -6,8 +6,9 @@
 # Node modules (will be installed fresh in Docker)
 **/node_modules
 
-# Build outputs
+# Build outputs (but keep demo build for Docker)
 **/build
+!demos/expo-crsql-demo/build
 **/dist
 **/.next
 **/.expo
@@ -33,6 +34,9 @@
 **/test
 **/__tests__
 **/cypress
+packages/browser-tests
+packages/node-tests
+packages/xplat-tests
 
 # Documentation
 *.md

@@ -17,11 +17,14 @@ COPY bun.lock package.json ./
 # for only the workspaces used by demos/expo-crsql-demo.
 COPY . .
 
+# Skip Cypress and SQLite binary downloads
+ENV CYPRESS_INSTALL_BINARY=0
+ENV BETTER_SQLITE3_SKIP_DOWNLOAD=1
+
 # Install only the needed workspace(s) and their deps
-# Requires Bun workspaces; --filter pulls transitive workspace deps
-RUN bun install --frozen-lockfile --filter demos/expo-crsql-demo && \
-    cd demos/expo-crsql-demo && \
-    bun install --frozen-lockfile
+# Skip postinstall scripts to avoid hanging builds
+RUN cd demos/expo-crsql-demo && \
+    bun install --ignore-scripts
 
 # Build-time env for Expo static replacement
 ARG EXPO_NO_TELEMETRY=1
