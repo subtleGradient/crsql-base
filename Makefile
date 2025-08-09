@@ -2,7 +2,6 @@ git-deps = deps/wa-sqlite deps/emsdk
 node-deps = ./packages/crsqlite-wasm/node_modules
 wasm-file = ./packages/crsqlite-wasm/dist/crsqlite.wasm
 tsbuildinfo = ./tsbuild-all/tsconfig.tsbuildinfo
-typed-sql-pkg = ./deps/typed-sql/packages/type-gen/pkg/package.json
 
 .EXPORT_ALL_VARIABLES:
 	CRSQLITE_NOPREBUILD = 1
@@ -12,10 +11,7 @@ all: $(wasm-file) $(tsbuildinfo)
 $(git-deps):
 	git submodule update --init --recursive
 
-$(typed-sql-pkg):
-	cd ../typed-sql/packages/type-gen; ./build.sh
-
-$(node-deps): $(git-deps) $(typed-sql-pkg)
+$(node-deps): $(git-deps)
 	bun install
 
 $(wasm-file): $(git-deps)
