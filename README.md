@@ -1,3 +1,6 @@
+Forked from [the original vlcn-io/js project](https://github.com/vlcn-io/js) in order to update dependencies and add support for more environments.
+
+
 # crsqlite-js
 
 JavaScript packages to use `cr-sqlite` in the browser, node, react and other JS frameworks & environments.
