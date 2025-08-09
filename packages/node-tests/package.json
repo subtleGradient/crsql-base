@@ -24,7 +24,7 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/tests/nodeno-tests"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/crsqlite-allinone": "workspace:*",
     "@vlcn.io/rx-tbl": "workspace:*",
     "@vlcn.io/xplat-api": "workspace:*",

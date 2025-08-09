@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@types/better-sqlite3": "^7.6.8",
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/logger-provider": "workspace:*",
     "@vlcn.io/ws-common": "workspace:*",
     "better-sqlite3": "^9.2.2",

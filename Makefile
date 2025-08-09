@@ -16,13 +16,13 @@ $(typed-sql-pkg):
 	cd ../typed-sql/packages/type-gen; ./build.sh
 
 $(node-deps): $(git-deps) $(typed-sql-pkg)
-	pnpm install
+	bun install
 
 $(wasm-file): $(git-deps)
 	./build-wasm.sh
 
 $(tsbuildinfo): $(node-deps) $(wasm-file) FORCE
-	cd tsbuild-all && pnpm run build
+	cd tsbuild-all && bun run build
 
 test: $(tsbuildinfo) $(wasm-file) FORCE
 	./test.sh

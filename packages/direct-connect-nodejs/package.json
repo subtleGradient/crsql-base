@@ -29,7 +29,7 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/packages/direct-connect-nodejs"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/direct-connect-common": "workspace:*",
     "@vlcn.io/xplat-api": "workspace:*",
     "better-sqlite3": "^9.1.1",

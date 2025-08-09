@@ -20,7 +20,7 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/packages/ws-litefs"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/ws-common": "workspace:*",
     "@vlcn.io/ws-server": "workspace:*",
     "better-sqlite3": "^9.1.1",

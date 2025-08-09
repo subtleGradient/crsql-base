@@ -11,7 +11,7 @@
     "better-sqlite3": "^9.1.1"
   },
   "devDependencies": {
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "vite": "^4.2.2"
   }
 }

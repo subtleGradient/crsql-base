@@ -19,7 +19,7 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "build": "tsc --build && pnpm run bundle-worker",
+    "build": "tsc --build",
     "watch": "tsc --build --watch",
     "test": "echo 'no tests yet'",
     "deep-clean": "rm -rf ./dist || true && rm tsconfig.tsbuildinfo || true"

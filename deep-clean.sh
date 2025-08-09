@@ -7,8 +7,8 @@ cd ./packages
 for dir in */ ; do
   # Navigate to the current subdirectory
   cd "$dir"
-  # Run pnpm deep-clean
-  pnpm deep-clean
+  # Run bun deep-clean
+  bun run deep-clean
   # Navigate back to the packages directory
   cd ..
 done

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a monorepo for cr-sqlite JavaScript/TypeScript packages - JavaScript implementations to use cr-sqlite (Conflict-free Replicated SQLite) in browser, Node.js, React and other JS environments. The project uses pnpm workspaces with TypeScript project references for efficient builds.
+This is a monorepo for cr-sqlite JavaScript/TypeScript packages - JavaScript implementations to use cr-sqlite (Conflict-free Replicated SQLite) in browser, Node.js, React and other JS environments. The project uses bun workspaces with TypeScript project references for efficient builds.
 
 ## Build Commands
 
@@ -13,7 +13,7 @@ This is a monorepo for cr-sqlite JavaScript/TypeScript packages - JavaScript imp
 make
 
 # Build only TypeScript packages (after WASM is built)
-cd tsbuild-all && pnpm run build
+cd tsbuild-all && bun run build
 
 # Build WASM separately
 ./build-wasm.sh
@@ -22,7 +22,7 @@ cd tsbuild-all && pnpm run build
 ./test.sh
 
 # Run tests for a specific package
-cd packages/<package-name> && pnpm run test
+cd packages/<package-name> && bun run test
 
 # Clean everything
 make clean
@@ -81,6 +81,6 @@ Tests are distributed across packages:
 
 External requirements:
 - Node.js >= 19
-- pnpm >= 7
+- Bun (latest version)
 - Rust nightly toolchain (for building from source)
 - Git submodules must be initialized for WASM builds

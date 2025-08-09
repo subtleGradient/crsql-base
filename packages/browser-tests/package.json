@@ -4,7 +4,7 @@
   "version": "0.14.0",
   "type": "module",
   "scripts": {
-    "test": "pnpm cypress run --component"
+    "test": "bun cypress run --component"
   },
   "dependencies": {
     "@vlcn.io/crsqlite-wasm": "workspace:*",

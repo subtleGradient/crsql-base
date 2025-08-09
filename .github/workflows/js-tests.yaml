@@ -47,8 +47,10 @@ jobs:
         with:
           node-version: 20.x
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
       - name: Windows build tools
         if: runner.os == 'Windows'

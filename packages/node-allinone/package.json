@@ -15,7 +15,7 @@
     "dist/**"
   ],
   "dependencies": {
-    "@vlcn.io/crsqlite": "workspace:*",
+    "@vlcn.io/crsqlite": "^0.16.3",
     "@vlcn.io/xplat-api": "workspace:*",
     "better-sqlite3": "^9.1.1"
   },
