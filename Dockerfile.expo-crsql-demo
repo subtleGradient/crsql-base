@@ -30,10 +30,12 @@ ARG EXPO_NO_TELEMETRY=1
 ENV EXPO_NO_TELEMETRY=$EXPO_NO_TELEMETRY
 # Set NODE_ENV for build stage to avoid directory check issue
 ENV NODE_ENV=development
+# Set CI to ensure non-interactive builds
+ENV CI=1
 
 # Export the Expo web bundle from the workspace
 WORKDIR /workspace/demos/expo-crsql-demo
-RUN bun run ./build.ts
+RUN timeout 120 bun run ./build.ts || (echo "Build timed out after 2 minutes" && exit 1)
 
 # ---- runtime: single Bun image serving static + API ----
 FROM oven/bun:1.2.19-alpine AS runtime

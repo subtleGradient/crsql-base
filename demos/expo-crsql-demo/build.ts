@@ -13,7 +13,13 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	await $`bun expo export --platform web --output-dir ${destination}`;
+	// Set CI env var to prevent interactive prompts and ensure non-interactive mode
+	const result =
+		await $`CI=1 bunx --bun @expo/cli@^0.24.0 export --platform web --output-dir ${destination} --non-interactive`;
+
+	if (result.exitCode !== 0) {
+		throw new Error(`Expo export failed with exit code ${result.exitCode}`);
+	}
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
