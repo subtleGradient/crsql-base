@@ -39,6 +39,7 @@ RUN bun run ./build.ts
 FROM oven/bun:1.2.19-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+ENV CI=1
 
 # Copy only the built artifacts
 COPY --from=build /workspace/demos/expo-crsql-demo/build /app
