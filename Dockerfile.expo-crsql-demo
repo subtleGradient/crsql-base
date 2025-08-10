@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy lockfile + root manifest first for better caching
-COPY bun.lock package.json ./
+COPY demos/expo-crsql-demo/bun.lock demos/expo-crsql-demo/package.json ./
 
 # Copy the whole monorepo (simplest + robust for workspaces)
 # If you want faster builds, replace this with targeted COPY lines

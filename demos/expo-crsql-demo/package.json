@@ -53,6 +53,9 @@
 		"eslint": "^9.25.0",
 		"eslint-config-expo": "~9.2.0"
 	},
+	"workspaces":[
+	  "../../packages/*"
+	],
 	"private": true,
 	"op-sqlite": {
 		"crsqlite": true

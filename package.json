@@ -2,7 +2,6 @@
 	"private": true,
 	"version": "0.0.0",
 	"workspaces": [
-		"demos/*",
 		"packages/*",
 		"packages/@op-engineering/op-sqlite",
 		"packages/@react-native/react-native",
