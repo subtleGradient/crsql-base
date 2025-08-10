@@ -10,7 +10,11 @@ native-ext = ./node_modules/@vlcn.io/crsqlite/dist/crsqlite.dylib
 all: $(git-deps) $(wasm-file) $(tsbuildinfo) $(native-ext)
 
 $(git-deps):
-	git submodule update --init --recursive
+	git submodule sync --recursive
+	git submodule update --init
+	git -C deps/cr-sqlite submodule sync --recursive || true
+	git -C deps/cr-sqlite config submodule.core/rs/sqlite-rs-embedded.url https://github.com/vlcn-io/sqlite-rs-embedded.git || true
+	git -C deps/cr-sqlite submodule update --init --recursive || true
 
 $(node-deps): $(git-deps)
 	bun install
