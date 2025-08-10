@@ -79,6 +79,8 @@ async function main() {
 	console.debug("[main] Starting Bun server build...");
 	await buildBunServer({ destination: buildRoot });
 	console.debug("[main] Bun server build complete.");
+
+	process.exit(0);
 }
 
 if (import.meta.main) await main();
