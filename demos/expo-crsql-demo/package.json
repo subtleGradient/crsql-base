@@ -67,8 +67,6 @@
 		"../../packages/ws-browserdb",
 		"../../packages/ws-client",
 		"../../packages/ws-common",
-		"../../packages/ws-litefs",
-		"../../packages/ws-server",
 		"../../packages/xplat-api"
 	],
 	"private": true,
