@@ -13,15 +13,18 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	const subprocess = Bun.spawn([
-		"bunx",
-		"expo",
-		"export",
-		"--platform",
-		"web",
-		"--output-dir",
-		destination.name ?? "",
-	]);
+	const subprocess = Bun.spawn(
+		[
+			"bunx",
+			"expo",
+			"export",
+			"--platform",
+			"web",
+			"--output-dir",
+			destination.name ?? "",
+		],
+		{ stdio: ["ignore", "inherit", "inherit"] },
+	);
 
 	const exitCode = await subprocess.exited;
 	if (exitCode)
