@@ -1,7 +1,7 @@
-import { Database } from 'bun:sqlite';
-import { fileURLToPath } from 'url';
-import { existsSync } from 'fs';
-import { join, dirname } from 'path';
+import { Database } from "bun:sqlite";
+import { existsSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 let customSQLiteSet = false;
 
@@ -11,38 +11,46 @@ let customSQLiteSet = false;
  * @returns true if successfully set, false if already set
  */
 export function setBundledSQLite(): boolean {
-  if (customSQLiteSet) {
-    console.warn('setBundledSQLite() was already called. Skipping...');
-    return false;
-  }
+	if (customSQLiteSet) {
+		console.warn("setBundledSQLite() was already called. Skipping...");
+		return false;
+	}
 
-  const dylibPath = getSQLitePath();
-  
-  if (!existsSync(dylibPath)) {
-    const archSuffix = process.arch === 'arm64' ? 'arm64' : 'x64';
-    throw new Error(
-      `SQLite library not found at ${dylibPath}. ` +
-      `Make sure the platform-specific package is installed: ` +
-      `@vlcn.io/libsqlite3-darwin-${archSuffix}`
-    );
-  }
+	const dylibPath = getSQLitePath();
 
-  Database.setCustomSQLite(dylibPath);
-  customSQLiteSet = true;
-  
-  console.debug(`✅ Custom SQLite set: ${dylibPath}`);
-  return true;
+	if (!existsSync(dylibPath)) {
+		const archSuffix = process.arch === "arm64" ? "arm64" : "x64";
+		throw new Error(
+			`SQLite library not found at ${dylibPath}. ` +
+				`Make sure the platform-specific package is installed: ` +
+				`@vlcn.io/libsqlite3-darwin-${archSuffix}`,
+		);
+	}
+
+	Database.setCustomSQLite(dylibPath);
+	customSQLiteSet = true;
+
+	console.debug(`✅ Custom SQLite set: ${dylibPath}`);
+	return true;
 }
 
 /**
  * Gets the path to the bundled SQLite library
  * @returns The absolute path to the SQLite dylib
  */
-export function getSQLitePath(): string {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const arch = process.arch === 'arm64' ? 'darwin-arm64' : 'darwin-x64';
-  const dylibPath = join(__dirname, '..', '..', `libsqlite3-${arch}`, 'vendor', 'libsqlite3.0.dylib');
-  return dylibPath;
+export function getSQLitePath() {
+	if (process.platform !== "darwin") return;
+	const __dirname = dirname(fileURLToPath(import.meta.url));
+	const arch = process.arch === "arm64" ? "darwin-arm64" : "darwin-x64";
+	const dylibPath = join(
+		__dirname,
+		"..",
+		"..",
+		`libsqlite3-${arch}`,
+		"vendor",
+		"libsqlite3.0.dylib",
+	);
+	return dylibPath;
 }
 
 /**
@@ -50,11 +58,11 @@ export function getSQLitePath(): string {
  * @returns true if the library exists, false otherwise
  */
 export function isSQLiteAvailable(): boolean {
-  try {
-    return existsSync(getSQLitePath());
-  } catch {
-    return false;
-  }
+	try {
+		return existsSync(getSQLitePath());
+	} catch {
+		return false;
+	}
 }
 
 /**
@@ -62,9 +70,9 @@ export function isSQLiteAvailable(): boolean {
  * @returns The SQLite version string
  */
 export function getSQLiteVersion(): string {
-  // This would be dynamically determined from the actual library
-  // For now, return the version we're targeting
-  return '3.47.2';
+	// This would be dynamically determined from the actual library
+	// For now, return the version we're targeting
+	return "3.47.2";
 }
 
 /**
@@ -72,5 +80,5 @@ export function getSQLiteVersion(): string {
  * @internal
  */
 export function resetCustomSQLite(): void {
-  customSQLiteSet = false;
+	customSQLiteSet = false;
 }
