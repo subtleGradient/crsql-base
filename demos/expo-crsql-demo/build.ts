@@ -1,5 +1,5 @@
 #!bun
-import { $, type BunFile, file, stdout } from "bun";
+import { $, type BunFile, file, sleep, stdout } from "bun";
 
 const makePathsRelative = (html: string) =>
 	html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
@@ -14,17 +14,28 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 		);
 
 	// Set CI env var to prevent interactive prompts and ensure non-interactive mode
-	const result =
-		await $`CI=1 bunx --bun @expo/cli@^0.24.0 export --platform web --output-dir ${destination} --non-interactive`;
+	const resultPromise =
+		$`CI=1 bunx --bun expo export --platform web --output-dir ${destination}`.catch(
+			(err) => ({ exitCode: err.exitCode }),
+		);
 
-	if (result.exitCode !== 0) {
-		throw new Error(`Expo export failed with exit code ${result.exitCode}`);
+	const maxTime = 60 * 1000; // 60 seconds
+	const startTime = Date.now();
+	while (!(await file(`${destination.name}/index.html`).exists())) {
+		// console.debug(
+		// 	`[buildExpoWeb] Waiting for index.html to be created...`,
+		// 	file(`${destination.name}/index.html`).name,
+		// );
+		await sleep(100);
+		if (Date.now() - startTime > maxTime) {
+			throw new Error(
+				`Expo web build did not produce index.html within ${maxTime / 1000} seconds.`,
+			);
+		}
 	}
 
-	const expoWebIndex = file(`${destination.name}/index.html`);
-
-	const html = await expoWebIndex.text();
-	await expoWebIndex.write(makePathsRelative(html));
+	const html = await file(`${destination.name}/index.html`).text();
+	await file(`${destination.name}/index.html`).write(makePathsRelative(html));
 	console.debug(
 		`[buildExpoWeb] Finished Expo web build to: ${destination.name}`,
 	);
