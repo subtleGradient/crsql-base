@@ -1,4 +1,5 @@
-import { type DB, open } from "./db";
+import { type DB } from "./db";
+import * as dbModule from "./db";
 
 let db: DB | null = null;
 
@@ -14,20 +15,24 @@ export const initDatabase = async (): Promise<DB> => {
 	if (db) return db;
 
 	try {
-		// Open database with cr-sqlite extension
-		db = open({
+		// Open database (web version handles initialization internally)
+		db = dbModule.open({
 			name: "crsqlite-demo.db",
 			location: "default",
 		});
 
-		// Create tables
+		// Drop existing table if it exists (in case of schema change)
+		await db.execute(`DROP TABLE IF EXISTS todos;`);
+		
+		// Create tables with CR-SQLite compatible schema
+		// All NOT NULL columns need DEFAULT values for CR-SQLite
 		await db.execute(`
-      CREATE TABLE IF NOT EXISTS todos (
-        id TEXT PRIMARY KEY,
-        text TEXT NOT NULL,
+      CREATE TABLE todos (
+        id TEXT PRIMARY KEY NOT NULL,
+        text TEXT DEFAULT '' NOT NULL,
         completed INTEGER DEFAULT 0,
-        created_at INTEGER DEFAULT (strftime('%s', 'now')),
-        updated_at INTEGER DEFAULT (strftime('%s', 'now'))
+        created_at INTEGER DEFAULT 0,
+        updated_at INTEGER DEFAULT 0
       );
     `);
 
@@ -66,10 +71,11 @@ export const getDbVersion = async (): Promise<number> => {
 // Todo CRUD operations
 export const addTodo = async (text: string): Promise<string> => {
 	const id = `todo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-	await getDatabase().execute("INSERT INTO todos (id, text) VALUES (?, ?)", [
-		id,
-		text,
-	]);
+	const now = Math.floor(Date.now() / 1000);
+	await getDatabase().execute(
+		"INSERT INTO todos (id, text, created_at, updated_at) VALUES (?, ?, ?, ?)",
+		[id, text, now, now]
+	);
 	return id;
 };
 
@@ -81,9 +87,10 @@ export const getTodos = async (): Promise<Todo[]> => {
 };
 
 export const toggleTodo = async (id: string): Promise<void> => {
+	const now = Math.floor(Date.now() / 1000);
 	await getDatabase().execute(
-		`UPDATE todos SET completed = NOT completed, updated_at = strftime('%s', 'now') WHERE id = ?`,
-		[id],
+		`UPDATE todos SET completed = NOT completed, updated_at = ? WHERE id = ?`,
+		[now, id],
 	);
 };
 

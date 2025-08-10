@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 import {
 	ActivityIndicator,
 	Alert,
@@ -13,25 +13,81 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText as Text } from "@/components/ThemedText";
 import { ThemedView as View } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
-import { useDatabase, useTodos } from "@/hooks/useDatabase";
+import { useDatabaseSuspense } from "@/hooks/useDatabaseSuspense";
+import {
+	addTodo as addTodoDb,
+	deleteTodo as deleteTodoDb,
+	getTodos,
+	type Todo,
+	toggleTodo as toggleTodoDb,
+} from "@/services/database";
 
-export default function TabTwoScreen() {
-	const { isInitialized, siteId, dbVersion, refreshDbVersion } = useDatabase();
-	const { todos, loading, error, addTodo, toggleTodo, deleteTodo, refresh } =
-		useTodos();
+function LoadingView() {
+	return (
+		<View style={styles.centerContainer}>
+			<ActivityIndicator size="large" />
+			<Text>Initializing CR-SQLite...</Text>
+		</View>
+	);
+}
+
+function ErrorView({ error }: { error: Error }) {
+	return (
+		<View style={styles.centerContainer}>
+			<IconSymbol name="exclamationmark.triangle" size={48} color="#ff0000" />
+			<Text style={styles.errorText}>Database Error</Text>
+			<Text>{error.message}</Text>
+		</View>
+	);
+}
+
+function TodoList() {
+	const { db, getSiteId, getDbVersion } = useDatabaseSuspense();
+	const [todos, setTodos] = useState<Todo[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<Error | null>(null);
 	const [newTodoText, setNewTodoText] = useState("");
 	const [isRefreshing, setIsRefreshing] = useState(false);
+	const [siteId, setSiteId] = useState("");
+	const [dbVersion, setDbVersion] = useState(0);
+
+	const loadTodos = async () => {
+		try {
+			setLoading(true);
+			const data = await getTodos();
+			setTodos(data);
+			setError(null);
+		} catch (err) {
+			setError(err as Error);
+			console.error("Failed to load todos:", err);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const refreshDbInfo = async () => {
+		const [id, version] = await Promise.all([getSiteId(), getDbVersion()]);
+		setSiteId(id);
+		setDbVersion(version);
+	};
+
+	useEffect(() => {
+		loadTodos();
+		refreshDbInfo();
+	}, []);
 
 	const handleAddTodo = async () => {
 		if (!newTodoText.trim()) return;
-		await addTodo(newTodoText.trim());
+		await addTodoDb(newTodoText.trim());
 		setNewTodoText("");
-		await refreshDbVersion();
+		await loadTodos();
+		await refreshDbInfo();
 	};
 
 	const handleToggle = async (id: string) => {
-		await toggleTodo(id);
-		await refreshDbVersion();
+		await toggleTodoDb(id);
+		await loadTodos();
+		await refreshDbInfo();
 	};
 
 	const handleDelete = async (id: string) => {
@@ -41,8 +97,9 @@ export default function TabTwoScreen() {
 				text: "Delete",
 				style: "destructive",
 				onPress: async () => {
-					await deleteTodo(id);
-					await refreshDbVersion();
+					await deleteTodoDb(id);
+					await loadTodos();
+					await refreshDbInfo();
 				},
 			},
 		]);
@@ -50,28 +107,13 @@ export default function TabTwoScreen() {
 
 	const handleRefresh = async () => {
 		setIsRefreshing(true);
-		await refresh();
-		await refreshDbVersion();
+		await loadTodos();
+		await refreshDbInfo();
 		setIsRefreshing(false);
 	};
 
-	if (!isInitialized) {
-		return (
-			<View style={styles.centerContainer}>
-				<ActivityIndicator size="large" />
-				<Text>Initializing CR-SQLite...</Text>
-			</View>
-		);
-	}
-
 	if (error) {
-		return (
-			<View style={styles.centerContainer}>
-				<IconSymbol name="exclamationmark.triangle" size={48} color="#ff0000" />
-				<Text style={styles.errorText}>Database Error</Text>
-				<Text>{error.message}</Text>
-			</View>
-		);
+		return <ErrorView error={error} />;
 	}
 
 	return (
@@ -87,7 +129,7 @@ export default function TabTwoScreen() {
 			}
 		>
 			<View style={styles.titleContainer}>
-				<Text type="title">CR-SQLite Demo</Text>
+				<Text type="title">CR-SQLite Demo (Suspense)</Text>
 			</View>
 
 			<View style={styles.infoContainer}>
@@ -169,6 +211,14 @@ export default function TabTwoScreen() {
 				</Text>
 			</View>
 		</ParallaxScrollView>
+	);
+}
+
+export default function TabTwoScreenSuspense() {
+	return (
+		<Suspense fallback={<LoadingView />}>
+			<TodoList />
+		</Suspense>
 	);
 }
 

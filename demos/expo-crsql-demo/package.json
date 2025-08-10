@@ -52,9 +52,11 @@
 	"devDependencies": {
 		"@babel/core": "^7.25.2",
 		"@babel/plugin-transform-class-properties": "^7.27.1",
+		"@babel/plugin-transform-flow-strip-types": "^7.27.1",
 		"@babel/plugin-transform-private-methods": "^7.27.1",
 		"@babel/plugin-transform-private-property-in-object": "^7.27.1",
 		"@types/react": "~19.0.10",
+		"babel-plugin-syntax-hermes-parser": "^0.31.0",
 		"babel-preset-expo": "^13.2.3",
 		"eslint": "^9.25.0",
 		"eslint-config-expo": "~9.2.0",

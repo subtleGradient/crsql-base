@@ -52,11 +52,14 @@ export const useDatabase = () => {
 };
 
 export const useTodos = () => {
+  const { isInitialized } = useDatabase();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   const loadTodos = useCallback(async () => {
+    if (!isInitialized) return;
+    
     try {
       setLoading(true);
       const data = await getTodos();
@@ -68,7 +71,7 @@ export const useTodos = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [isInitialized]);
 
   const add = useCallback(async (text: string) => {
     try {
@@ -101,8 +104,10 @@ export const useTodos = () => {
   }, [loadTodos]);
 
   useEffect(() => {
-    loadTodos();
-  }, [loadTodos]);
+    if (isInitialized) {
+      loadTodos();
+    }
+  }, [isInitialized, loadTodos]);
 
   return {
     todos,
