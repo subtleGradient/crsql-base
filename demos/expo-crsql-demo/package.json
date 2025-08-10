@@ -9,7 +9,6 @@
 		"build:web": "bun run ./build.ts",
 		"build:web:expo": "bunx expo export --platform web --output-dir ./build/expo",
 		"build:web:docker": "docker build -t expo-crsql-demo -f ../../Dockerfile.expo-crsql-demo ../..",
-		"build:web:docker:innards": "mkdir -p build/expo && bun build:web:expo && build:web",
 		"start:docker": "docker run -p 3000:3000 --rm expo-crsql-demo",
 		"dev": "expo",
 		"start": "expo start",

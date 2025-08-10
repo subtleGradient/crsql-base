@@ -1,5 +1,5 @@
 #!bun
-import { $, type BunFile, file } from "bun";
+import { $, type BunFile, file, stdout } from "bun";
 
 const makePathsRelative = (html: string) =>
 	html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
@@ -13,10 +13,10 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	// for await (const line of $`bunx expo export --platform web --output-dir ${destination}`.lines()) {
-	// 	// Optionally, handle each line here if needed
-	// 	if (line.includes("Exported:")) break;
-	// }
+	for await (const line of $`bunx expo export --platform web --output-dir ${destination}`.lines()) {
+		stdout.write(line + "\n");
+		if (line.includes("Exported:")) break;
+	}
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
