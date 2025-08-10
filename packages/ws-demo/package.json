@@ -22,7 +22,7 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/packages/ws-client"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite-wasm": "workspace:*",
+    "@vlcn.io-community/crsqlite-wasm": "workspace:*",
     "@vlcn.io-community/react": "workspace:*",
     "@vlcn.io-community/ws-browserdb": "workspace:*",
     "@vlcn.io-community/ws-client": "workspace:*",

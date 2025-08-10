@@ -30,7 +30,7 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/packages/direct-connect-browser"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite-wasm": "workspace:*",
+    "@vlcn.io-community/crsqlite-wasm": "workspace:*",
     "@vlcn.io-community/direct-connect-common": "workspace:*",
     "@vlcn.io-community/rx-tbl": "workspace:*",
     "@vlcn.io-community/xplat-api": "workspace:*"

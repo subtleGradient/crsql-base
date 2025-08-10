@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@vlcn.io/crsqlite": "^0.16.3",
-    "@vlcn.io/crsqlite-allinone": "workspace:*",
+    "@vlcn.io-community/crsqlite-allinone": "workspace:*",
     "@vlcn.io-community/rx-tbl": "workspace:*",
     "@vlcn.io-community/xplat-api": "workspace:*",
     "@vlcn.io-community/xplat-tests": "workspace:*",

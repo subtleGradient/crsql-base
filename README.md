@@ -39,7 +39,7 @@ db.close();
 import Database from "better-sqlite3";
 
 const db = new Database(":memory:");
-import { extensionPath } from "@vlcn.io-community/crsqlite";
+import { extensionPath } from "@vlcn.io/crsqlite";
 db.loadExtension(extensionPath);
 
 ...
@@ -52,7 +52,7 @@ db.close();
 ```ts
 import { Database } from "bun:sqlite";
 import { setCustomSQLite } from "@vlcn.io-community/bun-sqlite-lib";
-import { extensionPath } from "@vlcn.io-community/crsqlite";
+import { extensionPath } from "@vlcn.io/crsqlite";
 
 // Required on macOS to use a SQLite build with extension support
 // No-op on other platforms
@@ -153,7 +153,7 @@ See official docs or the `vite-starter`
 If you want to build these projects from source and/or hack on them or contribute, you'll need to clone the workspace repository:
 
 ```bash
-git clone --recurse-submodules git@github.com:vlcn-io/workspace.git
+git clone --recurse-submodules git@github.com:subtleGradient/cr-sqlite-js.git
 ```
 
 Running `make` in that directory will get you set up. Ensure you have the rust nightly toolchain installed and activated before running make.
@@ -162,31 +162,31 @@ Running `make` in that directory will get you set up. Ensure you have the rust n
 
 |status|original package|new package? (maybe)|
 |-|-|-|
-|unreleased |@vlcn.io-community/browser-tests           |@vlcn.io-community/browser-tests|
-|unreleased |@vlcn.io-community/crsqlite                |@vlcn.io-community/crsqlite|
-|unreleased |@vlcn.io-community/crsqlite-allinone       |@vlcn.io-community/crsqlite-allinone|
-|unreleased |@vlcn.io-community/crsqlite-wasm           |@vlcn.io-community/crsqlite-wasm|
-|unreleased |@vlcn.io-community/direct-connect-browser  |@vlcn.io-community/direct-connect-browser|
-|unreleased |@vlcn.io-community/direct-connect-common   |@vlcn.io-community/direct-connect-common|
-|unreleased |@vlcn.io-community/direct-connect-nodejs   |@vlcn.io-community/direct-connect-nodejs|
-|unreleased |@vlcn.io-community/id                      |@vlcn.io-community/id|
-|unreleased |@vlcn.io-community/logger-provider         |@vlcn.io-community/logger-provider|
-|unreleased |@vlcn.io-community/nodeno-tests            |@vlcn.io-community/nodeno-tests|
-|unreleased |@vlcn.io-community/py-correctness          |@vlcn.io-community/py-correctness|
-|unreleased |@vlcn.io-community/react                   |@vlcn.io-community/react|
-|unreleased |@vlcn.io-community/rx-query                |@vlcn.io-community/rx-query|
-|unreleased |@vlcn.io-community/rx-tbl                  |@vlcn.io-community/rx-tbl|
-|unreleased |@vlcn.io-community/sync-p2p                |@vlcn.io-community/sync-p2p|
-|unreleased |@vlcn.io-community/tsbuild-all             |@vlcn.io-community/tsbuild-all|
-|unreleased |@vlcn.io-community/wa-sqlite               |@vlcn.io-community/wa-sqlite|
-|unreleased |@vlcn.io-community/ws-browserdb            |@vlcn.io-community/ws-browserdb|
-|unreleased |@vlcn.io-community/ws-client               |@vlcn.io-community/ws-client|
-|unreleased |@vlcn.io-community/ws-common               |@vlcn.io-community/ws-common|
-|unreleased |@vlcn.io-community/ws-demo                 |@vlcn.io-community/ws-demo|
-|unreleased |@vlcn.io-community/ws-litefs               |@vlcn.io-community/ws-litefs|
-|unreleased |@vlcn.io-community/ws-server               |@vlcn.io-community/ws-server|
-|unreleased |@vlcn.io-community/xplat-api               |@vlcn.io-community/xplat-api|
-|unreleased |@vlcn.io-community/xplat-tests             |@vlcn.io-community/xplat-tests|
+|separate repo |@vlcn.io/crsqlite             |@vlcn.io/crsqlite|
+|unreleased |@vlcn.io/browser-tests           |@vlcn.io-community/browser-tests|
+|unreleased |@vlcn.io/crsqlite-allinone       |@vlcn.io-community/crsqlite-allinone|
+|unreleased |@vlcn.io/crsqlite-wasm           |@vlcn.io-community/crsqlite-wasm|
+|unreleased |@vlcn.io/direct-connect-browser  |@vlcn.io-community/direct-connect-browser|
+|unreleased |@vlcn.io/direct-connect-common   |@vlcn.io-community/direct-connect-common|
+|unreleased |@vlcn.io/direct-connect-nodejs   |@vlcn.io-community/direct-connect-nodejs|
+|unreleased |@vlcn.io/id                      |@vlcn.io-community/id|
+|unreleased |@vlcn.io/logger-provider         |@vlcn.io-community/logger-provider|
+|unreleased |@vlcn.io/nodeno-tests            |@vlcn.io-community/nodeno-tests|
+|unreleased |@vlcn.io/py-correctness          |@vlcn.io-community/py-correctness|
+|unreleased |@vlcn.io/react                   |@vlcn.io-community/react|
+|unreleased |@vlcn.io/rx-query                |@vlcn.io-community/rx-query|
+|unreleased |@vlcn.io/rx-tbl                  |@vlcn.io-community/rx-tbl|
+|unreleased |@vlcn.io/sync-p2p                |@vlcn.io-community/sync-p2p|
+|unreleased |@vlcn.io/tsbuild-all             |@vlcn.io-community/tsbuild-all|
+|unreleased |@vlcn.io/wa-sqlite               |@vlcn.io-community/wa-sqlite|
+|unreleased |@vlcn.io/ws-browserdb            |@vlcn.io-community/ws-browserdb|
+|unreleased |@vlcn.io/ws-client               |@vlcn.io-community/ws-client|
+|unreleased |@vlcn.io/ws-common               |@vlcn.io-community/ws-common|
+|unreleased |@vlcn.io/ws-demo                 |@vlcn.io-community/ws-demo|
+|unreleased |@vlcn.io/ws-litefs               |@vlcn.io-community/ws-litefs|
+|unreleased |@vlcn.io/ws-server               |@vlcn.io-community/ws-server|
+|unreleased |@vlcn.io/xplat-api               |@vlcn.io-community/xplat-api|
+|unreleased |@vlcn.io/xplat-tests             |@vlcn.io-community/xplat-tests|
 
 
 |status|new package|

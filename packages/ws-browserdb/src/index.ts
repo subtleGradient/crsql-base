@@ -1,5 +1,5 @@
 import { DB } from "@vlcn.io-community/ws-client";
-import initWasm, { DB as WasmDB } from "@vlcn.io/crsqlite-wasm";
+import initWasm, { DB as WasmDB } from "@vlcn.io-community/crsqlite-wasm";
 import { Change } from "@vlcn.io-community/ws-common";
 import { StmtAsync, firstPick } from "@vlcn.io-community/xplat-api";
 import tblrx from "@vlcn.io-community/rx-tbl";

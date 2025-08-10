@@ -7,7 +7,7 @@
     "test": "bun cypress run --component"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite-wasm": "workspace:*",
+    "@vlcn.io-community/crsqlite-wasm": "workspace:*",
     "@vlcn.io-community/xplat-tests": "workspace:*"
   },
   "devDependencies": {

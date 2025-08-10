@@ -19,7 +19,7 @@
     "vite": "^4.2.2"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite-wasm": "workspace:*",
+    "@vlcn.io-community/crsqlite-wasm": "workspace:*",
     "@vlcn.io-community/direct-connect-browser": "workspace:*",
     "@vlcn.io-community/direct-connect-common": "workspace:*",
     "@vlcn.io-community/direct-connect-nodejs": "workspace:*",
