@@ -5,6 +5,7 @@
 		"demos/*",
 		"packages/*",
 		"packages/@op-engineering/op-sqlite",
+		"packages/@react-native/react-native",
 		"tsbuild-all"
 	],
 	"engines": {
