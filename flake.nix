@@ -10,13 +10,12 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        
+
         # Node.js version that meets the >= 19 requirement
         nodejs = pkgs.nodejs_22;
-        
-      in
-      {
-        devShells.default = pkgs.mkShell {
+
+        # Reusable dev shell derivation used for both `nix develop` and `nix build`
+        devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             # JavaScript/TypeScript toolchain
             nodejs
@@ -95,5 +94,10 @@
             ''}
           '';
         };
+      in
+      {
+        # Allow `nix build` to succeed by exposing the dev shell as a package
+        packages.default = devShell;
+        devShells.default = devShell;
       });
 }
