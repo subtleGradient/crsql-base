@@ -28,9 +28,8 @@ test: $(tsbuildinfo) $(wasm-file) $(native-ext) FORCE
 	./test.sh
 
 clean:
-	./deep-clean.sh
-	cd deps/wa-sqlite && make clean
-	cd deps/cr-sqlite/core/ && make clean
+	git clean -xfd
+	git submodule foreach --recursive git clean -xfd
 
 FORCE:
 
