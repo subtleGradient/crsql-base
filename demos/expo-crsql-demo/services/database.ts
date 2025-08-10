@@ -21,13 +21,10 @@ export const initDatabase = async (): Promise<DB> => {
 			location: "default",
 		});
 
-		// Drop existing table if it exists (in case of schema change)
-		await db.execute(`DROP TABLE IF EXISTS todos;`);
-		
-		// Create tables with CR-SQLite compatible schema
+		// Create tables with CR-SQLite compatible schema if they don't exist
 		// All NOT NULL columns need DEFAULT values for CR-SQLite
 		await db.execute(`
-      CREATE TABLE todos (
+      CREATE TABLE IF NOT EXISTS todos (
         id TEXT PRIMARY KEY NOT NULL,
         text TEXT DEFAULT '' NOT NULL,
         completed INTEGER DEFAULT 0,
