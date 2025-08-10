@@ -14,7 +14,10 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 		);
 
 	// Set CI env var to prevent interactive prompts and ensure non-interactive mode
-	void $`CI=1 bunx --bun expo export --clear --platform web --output-dir ${destination}`;
+	const resultPromise =
+		$`CI=1 bunx --bun expo export --clear --platform web --output-dir ${destination}`.catch(
+			(err) => ({ exitCode: err.exitCode }),
+		);
 
 	const maxTime = 60 * 1000; // 60 seconds
 	const startTime = Date.now();
