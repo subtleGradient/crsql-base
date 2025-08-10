@@ -13,7 +13,7 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	await $`expo export --platform web --output-dir ${destination}`;
+	await $`bun expo export --platform web --output-dir ${destination}`;
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
