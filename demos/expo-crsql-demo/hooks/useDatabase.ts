@@ -57,6 +57,28 @@ export const useTodos = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  // Move loadTodos logic directly into useEffect to avoid circular dependency
+  useEffect(() => {
+    if (!isInitialized) return;
+    
+    const fetchTodos = async () => {
+      try {
+        setLoading(true);
+        const data = await getTodos();
+        setTodos(data);
+        setError(null);
+      } catch (err) {
+        setError(err as Error);
+        console.error('Failed to load todos:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTodos();
+  }, [isInitialized]);
+
+  // Create a stable loadTodos function for manual refreshes
   const loadTodos = useCallback(async () => {
     if (!isInitialized) return;
     
@@ -74,40 +96,46 @@ export const useTodos = () => {
   }, [isInitialized]);
 
   const add = useCallback(async (text: string) => {
+    if (!isInitialized) return;
+    
     try {
       await addTodo(text);
-      await loadTodos();
+      // Reload todos directly
+      const data = await getTodos();
+      setTodos(data);
     } catch (err) {
       setError(err as Error);
       console.error('Failed to add todo:', err);
     }
-  }, [loadTodos]);
+  }, [isInitialized]);
 
   const toggle = useCallback(async (id: string) => {
+    if (!isInitialized) return;
+    
     try {
       await toggleTodo(id);
-      await loadTodos();
+      // Reload todos directly
+      const data = await getTodos();
+      setTodos(data);
     } catch (err) {
       setError(err as Error);
       console.error('Failed to toggle todo:', err);
     }
-  }, [loadTodos]);
+  }, [isInitialized]);
 
   const remove = useCallback(async (id: string) => {
+    if (!isInitialized) return;
+    
     try {
       await deleteTodo(id);
-      await loadTodos();
+      // Reload todos directly
+      const data = await getTodos();
+      setTodos(data);
     } catch (err) {
       setError(err as Error);
       console.error('Failed to delete todo:', err);
     }
-  }, [loadTodos]);
-
-  useEffect(() => {
-    if (isInitialized) {
-      loadTodos();
-    }
-  }, [isInitialized, loadTodos]);
+  }, [isInitialized]);
 
   return {
     todos,
