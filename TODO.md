@@ -1,5 +1,16 @@
 - [x] `@vlcn.io/*` -> `@vlcn.io-community/*`
 - [ ] update README with a reason why this fork exists
 - [ ] The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
-- [ ] add an Expo React Native demo
+- [x] add an Expo React Native demo
+  - [ ] add cr-sqlite stuff to the Expo React Native demo
 - [ ] add another server demo and publish it
+- [ ] Add error boundaries to React components for better error handling
+- [ ] Add input validation for API endpoints
+- [ ] Add test coverage for demo directory:
+  - [ ] Unit tests for database operations, hooks, and components
+  - [ ] Integration tests for Docker setup and API endpoints
+  - [ ] CI/CD validation for new functionality
+- [ ] Enhance demo with advanced features:
+  - [ ] Multi-device sync demonstration
+  - [ ] CRDT conflict resolution examples
+  - [ ] Performance metrics display (sync stats, database performance)
