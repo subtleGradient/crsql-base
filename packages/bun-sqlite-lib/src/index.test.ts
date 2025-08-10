@@ -4,8 +4,16 @@ import { getSQLitePath, isSQLiteAvailable, getSQLiteVersion } from "./index";
 describe("bun-sqlite-lib", () => {
   it("should return correct SQLite path for current platform", () => {
     const path = getSQLitePath();
-    expect(path).toContain("libsqlite3");
-    expect(path).toContain(process.arch === "arm64" ? "darwin-arm64" : "darwin-x64");
+    
+    if (process.platform === 'darwin') {
+      // On macOS, should return a valid path
+      expect(typeof path).toBe("string");
+      expect(path).toContain("libsqlite3");
+      expect(path).toContain(process.arch === "arm64" ? "darwin-arm64" : "darwin-x64");
+    } else {
+      // On other platforms, should return null (not supported yet)
+      expect(path).toBeNull();
+    }
   });
 
   it("should check if SQLite is available", () => {

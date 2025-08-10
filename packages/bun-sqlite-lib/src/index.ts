@@ -18,12 +18,12 @@ export function setBundledSQLite(): boolean {
 
   const dylibPath = getSQLitePath();
   
-  if (!existsSync(dylibPath)) {
-    const archSuffix = process.arch === 'arm64' ? 'arm64' : 'x64';
+  if (!dylibPath) {
     throw new Error(
-      `SQLite library not found at ${dylibPath}. ` +
-      `Make sure the platform-specific package is installed: ` +
-      `@vlcn.io/libsqlite3-darwin-${archSuffix}`
+      `SQLite library not available for platform '${process.platform}'. ` +
+      `Currently only macOS (darwin) is supported. ` +
+      `Make sure you're running on macOS and the platform-specific package is installed: ` +
+      `@vlcn.io-community/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`
     );
   }
 
@@ -36,13 +36,21 @@ export function setBundledSQLite(): boolean {
 
 /**
  * Gets the path to the bundled SQLite library
- * @returns The absolute path to the SQLite dylib
+ * @returns The absolute path to the SQLite dylib, or null if not available for current platform
  */
-export function getSQLitePath(): string {
+export function getSQLitePath(): string | null {
   const __dirname = dirname(fileURLToPath(import.meta.url));
+  
+  // Only Darwin (macOS) is currently supported with bundled SQLite libraries
+  if (process.platform !== 'darwin') {
+    return null;
+  }
+  
   const arch = process.arch === 'arm64' ? 'darwin-arm64' : 'darwin-x64';
   const dylibPath = join(__dirname, '..', '..', `libsqlite3-${arch}`, 'vendor', 'libsqlite3.0.dylib');
-  return dylibPath;
+  
+  // Return null if library doesn't exist instead of invalid path
+  return existsSync(dylibPath) ? dylibPath : null;
 }
 
 /**
@@ -51,7 +59,8 @@ export function getSQLitePath(): string {
  */
 export function isSQLiteAvailable(): boolean {
   try {
-    return existsSync(getSQLitePath());
+    const path = getSQLitePath();
+    return path !== null;
   } catch {
     return false;
   }
