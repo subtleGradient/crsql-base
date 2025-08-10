@@ -10,7 +10,7 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	const minifyFlag = process.env.NODE_ENV === 'production' ? '' : '--no-minify';
+	const minifyFlag = process.env.NODE_ENV === "production" ? "" : "--no-minify";
 	await $`expo export --platform web --output-dir ${destination} ${minifyFlag} --no-bytecode --dump-assetmap`;
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
@@ -34,7 +34,7 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 		target: "bun",
 		conditions: ["react-server"],
 		sourcemap: true,
-		minify: process.env.NODE_ENV === 'production',
+		minify: process.env.NODE_ENV === "production",
 	});
 
 	const outputTable = result.outputs.map((output) => ({
@@ -51,15 +51,6 @@ export const __DEV__ = process.env.NODE_ENV !== "production";
 export const expoWebBuildRootPath = __DEV__
 	? `${import.meta.dir}/build/expo`
 	: `${import.meta.dir}/expo`;
-
-if (
-	!(await file(expoWebBuildRootPath)
-		.stat()
-		.then((it) => it.isDirectory()))
-)
-	throw new Error(`DEFECT: Expo web build root must exist, but it does not`, {
-		cause: expoWebBuildRootPath,
-	});
 
 export default main;
 async function main() {

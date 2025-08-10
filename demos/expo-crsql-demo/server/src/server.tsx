@@ -3,22 +3,31 @@ import * as path from "path";
 import { expoWebBuildRootPath } from "../../build";
 import index from "./index.html";
 
+if (
+	!(await Bun.file(expoWebBuildRootPath)
+		.stat()
+		.then((it) => it.isDirectory()))
+)
+	throw new Error(`DEFECT: Expo web build root must exist, but it does not`, {
+		cause: expoWebBuildRootPath,
+	});
+
 const expo = {
 	async GET(request) {
 		try {
 			const url = new URL(request.url);
 			let filePath = decodeURIComponent(url.pathname);
-			
+
 			// Remove leading slash and default to index.html
 			if (filePath === "/" || !filePath) {
 				filePath = "index.html";
 			} else {
 				filePath = filePath.replace(/^\/+/, "");
 			}
-			
+
 			// Resolve and normalize the path
 			const fsPath = path.resolve(expoWebBuildRootPath, filePath);
-			
+
 			// Prevent path traversal: ensure fsPath is within expoWebBuildRootPath
 			if (!fsPath.startsWith(path.resolve(expoWebBuildRootPath))) {
 				console.warn("Path traversal attempt:", fsPath);
