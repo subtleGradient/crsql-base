@@ -13,7 +13,19 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	await $`bunx expo export --platform web --output-dir ${destination}`;
+	const subprocess = Bun.spawn([
+		"bunx",
+		"expo",
+		"export",
+		"--platform",
+		"web",
+		"--output-dir",
+		destination.name ?? "",
+	]);
+
+	const exitCode = await subprocess.exited;
+	if (exitCode)
+		throw new Error(`Expo web build failed with exit code ${exitCode}`);
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
