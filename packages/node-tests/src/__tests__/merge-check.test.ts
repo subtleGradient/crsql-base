@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import crsqlite, { DB } from "@vlcn.io/crsqlite-allinone";
+import crsqlite, { DB } from "@vlcn.io-community/crsqlite-allinone";
 
 import fc, { integer } from "fast-check";
 import { nanoid } from "nanoid";
@@ -174,7 +174,7 @@ const randomizedTestCase = (
     const applyTo = dbs.slice(Math.floor(Math.random() * dbs.length));
     applyTo.forEach((db) => {
       const allIds = shuffle(
-        all(db, ["SELECT id FROM todo", []]).map((r) => r.id)
+        all(db, ["SELECT id FROM todo", []]).map((r: any) => r.id)
       );
       const toChange = allIds.slice(
         0,

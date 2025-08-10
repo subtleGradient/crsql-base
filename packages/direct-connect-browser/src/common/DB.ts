@@ -1,4 +1,4 @@
-import initWasm from "@vlcn.io/crsqlite-wasm";
+import initWasm from "@vlcn.io-community/crsqlite-wasm";
 import { DBAsync, StmtAsync } from "@vlcn.io-community/xplat-api";
 import { TXAsync } from "@vlcn.io-community/xplat-api";
 import { DBID } from "@vlcn.io-community/xplat-api";

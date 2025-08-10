@@ -1,6 +1,6 @@
-import sqliteWasm from "@vlcn.io/crsqlite-wasm";
+import sqliteWasm from "@vlcn.io-community/crsqlite-wasm";
 // @ts-ignore
-import wasmUrl from "@vlcn.io/crsqlite-wasm/crsqlite.wasm?url";
+import wasmUrl from "@vlcn.io-community/crsqlite-wasm/crsqlite.wasm?url";
 const crsqlite = await sqliteWasm((file) => wasmUrl);
 import { automigrateTests } from "@vlcn.io-community/xplat-tests";
 

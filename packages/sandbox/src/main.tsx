@@ -1,5 +1,5 @@
-import initWasm from "@vlcn.io/crsqlite-wasm";
-import wasmUrl from "@vlcn.io/crsqlite-wasm/crsqlite.wasm?url";
+import initWasm from "@vlcn.io-community/crsqlite-wasm";
+import wasmUrl from "@vlcn.io-community/crsqlite-wasm/crsqlite.wasm?url";
 
 const sqlite = await initWasm(() => wasmUrl);
 const db = await sqlite.open(":memory:");

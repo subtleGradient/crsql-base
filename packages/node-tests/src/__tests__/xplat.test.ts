@@ -3,7 +3,7 @@ import "../fill.js";
 import { test, expect } from "vitest";
 import { DBAsync, DB as DBSync } from "@vlcn.io-community/xplat-api";
 type DB = DBAsync | DBSync;
-import crsqlite from "@vlcn.io/crsqlite-allinone";
+import crsqlite from "@vlcn.io-community/crsqlite-allinone";
 
 function runTests(tests: {
   [key: string]: (

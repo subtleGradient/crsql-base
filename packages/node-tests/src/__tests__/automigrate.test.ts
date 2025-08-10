@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import crsqlite from "@vlcn.io/crsqlite-allinone";
+import crsqlite from "@vlcn.io-community/crsqlite-allinone";
 
 test("automigrate", () => {
   const db = crsqlite.open();
