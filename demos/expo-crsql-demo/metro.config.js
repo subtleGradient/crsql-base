@@ -1,46 +1,39 @@
-const { getDefaultConfig } = require("expo/metro-config");
-const path = require("path");
+const { getDefaultConfig } = require('expo/metro-config')
+const path = require('path')
 
-const config = getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname)
 
-// Add workspace packages to watchFolders
-const workspaceRoot = path.resolve(__dirname, "../..");
-config.watchFolders = [
-  ...config.watchFolders || [],
-  workspaceRoot,
-];
+// Watch the monorepo root but let Metro resolve symlinks naturally.
+const workspaceRoot = path.resolve(__dirname, '../..')
+config.watchFolders = [...(config.watchFolders ?? []), workspaceRoot]
 
-// Handle symlinked packages
-config.resolver.nodeModulesPaths = [
-  path.resolve(__dirname, "node_modules"),
-  path.resolve(workspaceRoot, "node_modules"),
-];
+// Prefer symlinks over manual nodeModulesPaths/extraNodeModules.
+config.resolver = {
+  ...config.resolver,
+  unstable_enableSymlinks: true,
+}
 
-// Add WASM as an asset extension
-config.resolver.assetExts.push("wasm");
+// Keep WASM as an asset (ok if already present).
+if (!config.resolver.assetExts.includes('wasm')) {
+  config.resolver.assetExts.push('wasm')
+}
 
-// Support ESM modules (.mjs) and enable package exports
-config.resolver.sourceExts = [...config.resolver.sourceExts, "mjs", "cjs"];
-config.resolver.unstable_enablePackageExports = true;
+// ✅ Treat ESM files correctly so import.meta is valid
+for (const ext of ['mjs', 'cjs']) {
+  if (!config.resolver.sourceExts.includes(ext)) {
+    config.resolver.sourceExts.push(ext)
+  }
+}
 
-// Ensure proper resolution of workspace packages
-config.resolver.extraNodeModules = {
-  "@vlcn.io-community/crsqlite-wasm": path.resolve(workspaceRoot, "packages/crsqlite-wasm"),
-  "@vlcn.io-community/rx-tbl": path.resolve(workspaceRoot, "packages/rx-tbl"),
-  "@vlcn.io-community/xplat-api": path.resolve(workspaceRoot, "packages/xplat-api"),
-};
-
-// Transform import.meta.url to work with Metro
+// Use Expo defaults for transforms; don't force alt transformer.
 config.transformer = {
   ...config.transformer,
-  babelTransformerPath: require.resolve("metro-react-native-babel-transformer"),
-  // Transform the workspace packages
   getTransformOptions: async () => ({
     transform: {
       experimentalImportSupport: false,
       inlineRequires: true,
     },
   }),
-};
+}
 
-module.exports = config;
+module.exports = config
