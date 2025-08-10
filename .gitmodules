@@ -2,8 +2,11 @@
 	path = deps/emsdk
 	url = https://github.com/emscripten-core/emsdk.git
 [submodule "deps/wa-sqlite"]
-	path = deps/wa-sqlite
-	url = git@github.com:vlcn-io/wa-sqlite.git
+        path = deps/wa-sqlite
+        url = https://github.com/vlcn-io/wa-sqlite.git
 [submodule "deps/cr-sqlite"]
-	path = deps/cr-sqlite
-	url = git@github.com:vlcn-io/cr-sqlite.git
+        path = deps/cr-sqlite
+        url = https://github.com/vlcn-io/cr-sqlite.git
+[submodule "deps/cr-sqlite/core/rs/sqlite-rs-embedded"]
+        path = deps/cr-sqlite/core/rs/sqlite-rs-embedded
+        url = https://github.com/vlcn-io/sqlite-rs-embedded.git
