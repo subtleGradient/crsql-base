@@ -13,8 +13,7 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	const minifyFlag = process.env.NODE_ENV === "production" ? "" : "--no-minify";
-	await $`expo export --platform web --output-dir ${destination} ${minifyFlag} --no-bytecode --dump-assetmap`;
+	await $`bunx expo export --platform web --output-dir ${destination}`;
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
