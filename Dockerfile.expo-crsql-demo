@@ -23,24 +23,25 @@ ENV BETTER_SQLITE3_SKIP_DOWNLOAD=1
 
 # Install only the needed workspace(s) and their deps
 # Skip postinstall scripts to avoid hanging builds
-RUN cd demos/expo-crsql-demo && \
-    bun install --ignore-scripts
+RUN cd demos/expo-crsql-demo && bun install
 
 # Build-time env for Expo static replacement
 ARG EXPO_NO_TELEMETRY=1
 ENV EXPO_NO_TELEMETRY=$EXPO_NO_TELEMETRY
 # Set NODE_ENV for build stage to avoid directory check issue
 ENV NODE_ENV=development
+# Set CI to ensure non-interactive builds
+ENV CI=1
 
 # Export the Expo web bundle from the workspace
-RUN cd demos/expo-crsql-demo && \
-    mkdir -p build/expo && \
-    bun run build:web
+WORKDIR /workspace/demos/expo-crsql-demo
+RUN bun run ./build.ts
 
 # ---- runtime: single Bun image serving static + API ----
 FROM oven/bun:1.2.19-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+ENV CI=1
 
 # Copy only the built artifacts
 COPY --from=build /workspace/demos/expo-crsql-demo/build /app

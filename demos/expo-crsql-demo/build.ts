@@ -1,25 +1,70 @@
 #!bun
-import { $, type BunFile, file } from "bun";
+import { $, type BunFile, file, sleep, stdout } from "bun";
 
 const makePathsRelative = (html: string) =>
 	html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
 
 async function buildExpoWeb({ destination }: { destination: BunFile }) {
+	console.debug(
+		`[buildExpoWeb] Starting Expo web build to: ${destination.name}`,
+	);
 	if (!(await destination.stat().then((it) => it.isDirectory())))
 		throw new Error(
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	const minifyFlag = process.env.NODE_ENV === 'production' ? '' : '--no-minify';
-	await $`expo export --platform web --output-dir ${destination} ${minifyFlag} --no-bytecode --dump-assetmap`;
+	// Set CI env var to prevent interactive prompts and ensure non-interactive mode
+	const buildProcess = $`CI=1 bunx --bun expo export --clear --platform web --output-dir ${destination}`;
 
-	const expoWebIndex = file(`${destination.name}/index.html`);
+	// Create a promise that resolves when build completes or rejects on error
+	const resultPromise = buildProcess.catch((err) => {
+		console.error(`[buildExpoWeb] Build process failed:`, err);
+		throw new Error(`Expo build failed with exit code: ${err.exitCode}`);
+	});
 
-	const html = await expoWebIndex.text();
-	await expoWebIndex.write(makePathsRelative(html));
+	const maxTime = Number(process.env.BUILD_TIMEOUT_MS || 60 * 1000); // Default 60 seconds
+	const startTime = Date.now();
+	let buildFailed = false;
+
+	// Monitor both the build process and the file creation
+	while (!(await file(`${destination.name}/index.html`).exists())) {
+		// Check if build process has already failed
+		await Promise.race([
+			sleep(100),
+			resultPromise.catch(() => {
+				buildFailed = true;
+			}),
+		]);
+
+		if (buildFailed) {
+			throw new Error(
+				"Expo web build process failed before producing index.html",
+			);
+		}
+
+		if (Date.now() - startTime > maxTime) {
+			throw new Error(
+				`Expo web build did not produce index.html within ${maxTime / 1000} seconds.`,
+			);
+		}
+	}
+
+	// DO NOT Wait for the build process to complete successfully
+	// because it freezes forever in some cases.
+	// Instead, we just ensure that index.html is created.
+	// await resultPromise; // DO NOT wait for this!
+
+	const html = await file(`${destination.name}/index.html`).text();
+	await file(`${destination.name}/index.html`).write(makePathsRelative(html));
+	console.debug(
+		`[buildExpoWeb] Finished Expo web build to: ${destination.name}`,
+	);
 }
 
 async function buildBunServer({ destination }: { destination: BunFile }) {
+	console.debug(
+		`[buildBunServer] Starting Bun server build to: ${destination.name}`,
+	);
 	if (!(await destination.stat().then((it) => it.isDirectory())))
 		throw new Error(
 			`Destination directory ${destination.name} must exist, but it does not.`,
@@ -34,7 +79,7 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 		target: "bun",
 		conditions: ["react-server"],
 		sourcemap: true,
-		minify: process.env.NODE_ENV === 'production',
+		minify: process.env.NODE_ENV === "production",
 	});
 
 	const outputTable = result.outputs.map((output) => ({
@@ -44,6 +89,9 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 	}));
 
 	console.table(outputTable);
+	console.debug(
+		`[buildBunServer] Finished Bun server build to: ${destination.name}`,
+	);
 }
 
 export const __DEV__ = process.env.NODE_ENV !== "production";
@@ -51,15 +99,6 @@ export const __DEV__ = process.env.NODE_ENV !== "production";
 export const expoWebBuildRootPath = __DEV__
 	? `${import.meta.dir}/build/expo`
 	: `${import.meta.dir}/expo`;
-
-if (
-	!(await file(expoWebBuildRootPath)
-		.stat()
-		.then((it) => it.isDirectory()))
-)
-	throw new Error(`DEFECT: Expo web build root must exist, but it does not`, {
-		cause: expoWebBuildRootPath,
-	});
 
 export default main;
 async function main() {
@@ -70,8 +109,15 @@ async function main() {
 	await $`mkdir ${buildRoot}`.nothrow();
 	await $`mkdir ${expoWebBuildRoot}`.nothrow();
 
+	console.debug("[main] Starting Expo web build...");
 	await buildExpoWeb({ destination: expoWebBuildRoot });
+	console.debug("[main] Expo web build complete.");
+
+	console.debug("[main] Starting Bun server build...");
 	await buildBunServer({ destination: buildRoot });
+	console.debug("[main] Bun server build complete.");
+
+	process.exit(0);
 }
 
 if (import.meta.main) await main();

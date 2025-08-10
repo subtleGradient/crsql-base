@@ -3,22 +3,31 @@ import * as path from "path";
 import { expoWebBuildRootPath } from "../../build";
 import index from "./index.html";
 
+if (
+	!(await Bun.file(expoWebBuildRootPath)
+		.stat()
+		.then((it) => it.isDirectory()))
+)
+	throw new Error(`DEFECT: Expo web build root must exist, but it does not`, {
+		cause: expoWebBuildRootPath,
+	});
+
 const expo = {
 	async GET(request) {
 		try {
 			const url = new URL(request.url);
 			let filePath = decodeURIComponent(url.pathname);
-			
+
 			// Remove leading slash and default to index.html
 			if (filePath === "/" || !filePath) {
 				filePath = "index.html";
 			} else {
 				filePath = filePath.replace(/^\/+/, "");
 			}
-			
+
 			// Resolve and normalize the path
 			const fsPath = path.resolve(expoWebBuildRootPath, filePath);
-			
+
 			// Prevent path traversal: ensure fsPath is within expoWebBuildRootPath
 			if (!fsPath.startsWith(path.resolve(expoWebBuildRootPath))) {
 				console.warn("Path traversal attempt:", fsPath);
@@ -27,13 +36,22 @@ const expo = {
 
 			const file = Bun.file(fsPath);
 			if (!(await file.exists())) {
-				console.warn(404, fsPath);
-				return new Response("File not found", { status: 404 });
+				console.debug(
+					`[404] File not found: ${filePath}, responding with index.html`,
+				);
+				return new Response(
+					Bun.file(path.resolve(expoWebBuildRootPath, "index.html")),
+				);
 			}
 			return new Response(file);
 		} catch (cause) {
-			console.error(request, cause);
-			return new Response("Unknown error", { status: 500 });
+			// Log only essential request information, not the entire request object
+			console.error(`[500] Server error - Path: ${request.url}`, {
+				method: request.method,
+				// NOTE: don't leak server errors to the client
+				// DO NOT DO THIS: error: cause instanceof Error ? cause.message : "Unknown error",
+			});
+			return new Response("Internal Server Error", { status: 500 });
 		}
 	},
 } as const satisfies Bun.RouterTypes.RouteValueWithWebSocketUpgrade<"/*">;

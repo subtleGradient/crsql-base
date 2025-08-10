@@ -5,13 +5,13 @@
 	"scripts": {
 		"server:dev": "cd server; bun --hot src/server.tsx",
 		"server:build": "cd server; bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
-		"server:start": "cd server; NODE_ENV=production bun src/server.tsx",
+		"server:start": "cd build; bun ./server.js",
 		"build:web": "bun run ./build.ts",
+		"build:web:expo": "bunx expo export --platform web --output-dir ./build/expo",
 		"build:web:docker": "docker build -t expo-crsql-demo -f ../../Dockerfile.expo-crsql-demo ../..",
 		"start:docker": "docker run -p 3000:3000 --rm expo-crsql-demo",
 		"dev": "expo",
 		"start": "expo start",
-		"reset-project": "node ./scripts/reset-project.js",
 		"android": "expo run:android",
 		"ios": "expo run:ios",
 		"web": "expo start --web",
@@ -23,6 +23,9 @@
 		"@react-navigation/bottom-tabs": "^7.3.10",
 		"@react-navigation/elements": "^2.3.8",
 		"@react-navigation/native": "^7.1.6",
+		"@vlcn.io-community/crsqlite-wasm": "workspace:*",
+		"@vlcn.io-community/rx-tbl": "workspace:*",
+		"@vlcn.io-community/xplat-api": "workspace:*",
 		"expo": "~53.0.20",
 		"expo-blur": "~14.1.5",
 		"expo-constants": "~17.1.7",
@@ -48,13 +51,33 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.25.2",
+		"@babel/plugin-transform-class-properties": "^7.27.1",
+		"@babel/plugin-transform-flow-strip-types": "^7.27.1",
+		"@babel/plugin-transform-private-methods": "^7.27.1",
+		"@babel/plugin-transform-private-property-in-object": "^7.27.1",
 		"@types/react": "~19.0.10",
-		"typescript": "~5.8.3",
+		"babel-plugin-syntax-hermes-parser": "^0.31.0",
+		"babel-preset-expo": "^13.2.3",
 		"eslint": "^9.25.0",
-		"eslint-config-expo": "~9.2.0"
+		"eslint-config-expo": "~9.2.0",
+		"metro-react-native-babel-transformer": "^0.77.0",
+		"typescript": "~5.8.3"
 	},
-	"workspaces":[
-	  "../../packages/*"
+	"workspaces": [
+		"../../packages/bun-sqlite-lib",
+		"../../packages/direct-connect-browser",
+		"../../packages/direct-connect-common",
+		"../../packages/crsqlite-wasm",
+		"../../packages/id",
+		"../../packages/logger-provider",
+		"../../packages/p2p",
+		"../../packages/react",
+		"../../packages/rx-query",
+		"../../packages/rx-tbl",
+		"../../packages/ws-browserdb",
+		"../../packages/ws-client",
+		"../../packages/ws-common",
+		"../../packages/xplat-api"
 	],
 	"private": true,
 	"op-sqlite": {
