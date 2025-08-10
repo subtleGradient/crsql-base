@@ -36,15 +36,22 @@ const expo = {
 
 			const file = Bun.file(fsPath);
 			if (!(await file.exists())) {
-				console.warn(404, fsPath);
+				console.debug(
+					`[404] File not found: ${filePath}, responding with index.html`,
+				);
 				return new Response(
 					Bun.file(path.resolve(expoWebBuildRootPath, "index.html")),
 				);
 			}
 			return new Response(file);
 		} catch (cause) {
-			console.error(request, cause);
-			return new Response("Unknown error", { status: 500 });
+			// Log only essential request information, not the entire request object
+			console.error(`[500] Server error - Path: ${request.url}`, {
+				method: request.method,
+				// NOTE: don't leak server errors to the client
+				// DO NOT DO THIS: error: cause instanceof Error ? cause.message : "Unknown error",
+			});
+			return new Response("Internal Server Error", { status: 500 });
 		}
 	},
 } as const satisfies Bun.RouterTypes.RouteValueWithWebSocketUpgrade<"/*">;
