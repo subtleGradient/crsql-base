@@ -6,7 +6,7 @@ tsbuildinfo = ./tsbuild-all/tsconfig.tsbuildinfo
 .EXPORT_ALL_VARIABLES:
 	CRSQLITE_NOPREBUILD = 1
 
-all: $(wasm-file) $(tsbuildinfo)
+all: $(git-deps) $(wasm-file) $(tsbuildinfo)
 
 $(git-deps):
 	git submodule update --init --recursive
