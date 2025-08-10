@@ -1,4 +1,5 @@
 import { serve } from "bun";
+import * as path from "path";
 import { expoWebBuildRootPath } from "../../build";
 import index from "./index.html";
 
@@ -6,8 +7,23 @@ const expo = {
 	async GET(request) {
 		try {
 			const url = new URL(request.url);
-			const filePath = url.pathname.replace(/^[/.]+/, ""); // Remove leading slashes or dots
-			const fsPath = `${expoWebBuildRootPath}/${filePath || "index.html"}`;
+			let filePath = decodeURIComponent(url.pathname);
+			
+			// Remove leading slash and default to index.html
+			if (filePath === "/" || !filePath) {
+				filePath = "index.html";
+			} else {
+				filePath = filePath.replace(/^\/+/, "");
+			}
+			
+			// Resolve and normalize the path
+			const fsPath = path.resolve(expoWebBuildRootPath, filePath);
+			
+			// Prevent path traversal: ensure fsPath is within expoWebBuildRootPath
+			if (!fsPath.startsWith(path.resolve(expoWebBuildRootPath))) {
+				console.warn("Path traversal attempt:", fsPath);
+				return new Response("Forbidden", { status: 403 });
+			}
 
 			const file = Bun.file(fsPath);
 			if (!(await file.exists())) {
@@ -24,6 +40,11 @@ const expo = {
 
 const server = serve({
 	routes: {
+		// Health check endpoint for Docker
+		"/up": {
+			GET: () => new Response("OK", { status: 200 }),
+		},
+
 		// Serve index.html for all unmatched routes.
 		"/flarm": index,
 

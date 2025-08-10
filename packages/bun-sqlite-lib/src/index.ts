@@ -19,10 +19,11 @@ export function setBundledSQLite(): boolean {
   const dylibPath = getSQLitePath();
   
   if (!existsSync(dylibPath)) {
+    const archSuffix = process.arch === 'arm64' ? 'arm64' : 'x64';
     throw new Error(
       `SQLite library not found at ${dylibPath}. ` +
       `Make sure the platform-specific package is installed: ` +
-      `@vlcn.io-community/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`
+      `@vlcn.io/libsqlite3-darwin-${archSuffix}`
     );
   }
 

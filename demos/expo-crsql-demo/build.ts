@@ -10,7 +10,8 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 			`Destination directory ${destination.name} must exist, but it does not.`,
 		);
 
-	await $`expo export --platform web --output-dir ${destination} --no-minify --no-bytecode --dump-assetmap`;
+	const minifyFlag = process.env.NODE_ENV === 'production' ? '' : '--no-minify';
+	await $`expo export --platform web --output-dir ${destination} ${minifyFlag} --no-bytecode --dump-assetmap`;
 
 	const expoWebIndex = file(`${destination.name}/index.html`);
 
@@ -33,7 +34,7 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 		target: "bun",
 		conditions: ["react-server"],
 		sourcemap: true,
-		minify: false,
+		minify: process.env.NODE_ENV === 'production',
 	});
 
 	const outputTable = result.outputs.map((output) => ({
