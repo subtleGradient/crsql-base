@@ -14,25 +14,45 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 		);
 
 	// Set CI env var to prevent interactive prompts and ensure non-interactive mode
-	const resultPromise =
-		$`CI=1 bunx --bun expo export --clear --platform web --output-dir ${destination}`.catch(
-			(err) => ({ exitCode: err.exitCode }),
-		);
+	const buildProcess = $`CI=1 bunx --bun expo export --clear --platform web --output-dir ${destination}`;
 
-	const maxTime = 60 * 1000; // 60 seconds
+	// Create a promise that resolves when build completes or rejects on error
+	const resultPromise = buildProcess.catch((err) => {
+		console.error(`[buildExpoWeb] Build process failed:`, err);
+		throw new Error(`Expo build failed with exit code: ${err.exitCode}`);
+	});
+
+	const maxTime = Number(process.env.BUILD_TIMEOUT_MS || 60 * 1000); // Default 60 seconds
 	const startTime = Date.now();
+	let buildFailed = false;
+
+	// Monitor both the build process and the file creation
 	while (!(await file(`${destination.name}/index.html`).exists())) {
-		// console.debug(
-		// 	`[buildExpoWeb] Waiting for index.html to be created...`,
-		// 	file(`${destination.name}/index.html`).name,
-		// );
-		await sleep(100);
+		// Check if build process has already failed
+		await Promise.race([
+			sleep(100),
+			resultPromise.catch(() => {
+				buildFailed = true;
+			}),
+		]);
+
+		if (buildFailed) {
+			throw new Error(
+				"Expo web build process failed before producing index.html",
+			);
+		}
+
 		if (Date.now() - startTime > maxTime) {
 			throw new Error(
 				`Expo web build did not produce index.html within ${maxTime / 1000} seconds.`,
 			);
 		}
 	}
+
+	// DO NOT Wait for the build process to complete successfully
+	// because it freezes forever in some cases.
+	// Instead, we just ensure that index.html is created.
+	// await resultPromise; // DO NOT wait for this!
 
 	const html = await file(`${destination.name}/index.html`).text();
 	await file(`${destination.name}/index.html`).write(makePathsRelative(html));
