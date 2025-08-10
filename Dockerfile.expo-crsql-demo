@@ -32,7 +32,7 @@ ENV EXPO_NO_TELEMETRY=$EXPO_NO_TELEMETRY
 ENV NODE_ENV=development
 
 # Export the Expo web bundle from the workspace
-RUN cd demos/expo-crsql-demo && bun run build:web
+RUN cd demos/expo-crsql-demo && bun run build:web:docker:innards
 
 # ---- runtime: single Bun image serving static + API ----
 FROM oven/bun:1.2.19-alpine AS runtime
