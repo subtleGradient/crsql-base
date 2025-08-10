@@ -5,6 +5,9 @@ const makePathsRelative = (html: string) =>
 	html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
 
 async function buildExpoWeb({ destination }: { destination: BunFile }) {
+	console.debug(
+		`[buildExpoWeb] Starting Expo web build to: ${destination.name}`,
+	);
 	if (!(await destination.stat().then((it) => it.isDirectory())))
 		throw new Error(
 			`Destination directory ${destination.name} must exist, but it does not.`,
@@ -17,9 +20,15 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 
 	const html = await expoWebIndex.text();
 	await expoWebIndex.write(makePathsRelative(html));
+	console.debug(
+		`[buildExpoWeb] Finished Expo web build to: ${destination.name}`,
+	);
 }
 
 async function buildBunServer({ destination }: { destination: BunFile }) {
+	console.debug(
+		`[buildBunServer] Starting Bun server build to: ${destination.name}`,
+	);
 	if (!(await destination.stat().then((it) => it.isDirectory())))
 		throw new Error(
 			`Destination directory ${destination.name} must exist, but it does not.`,
@@ -44,6 +53,9 @@ async function buildBunServer({ destination }: { destination: BunFile }) {
 	}));
 
 	console.table(outputTable);
+	console.debug(
+		`[buildBunServer] Finished Bun server build to: ${destination.name}`,
+	);
 }
 
 export const __DEV__ = process.env.NODE_ENV !== "production";
@@ -61,8 +73,13 @@ async function main() {
 	await $`mkdir ${buildRoot}`.nothrow();
 	await $`mkdir ${expoWebBuildRoot}`.nothrow();
 
+	console.debug("[main] Starting Expo web build...");
 	await buildExpoWeb({ destination: expoWebBuildRoot });
+	console.debug("[main] Expo web build complete.");
+
+	console.debug("[main] Starting Bun server build...");
 	await buildBunServer({ destination: buildRoot });
+	console.debug("[main] Bun server build complete.");
 }
 
 if (import.meta.main) await main();
