@@ -14,7 +14,7 @@ async function buildExpoWeb({ destination }: { destination: BunFile }) {
 		);
 
 	for await (const line of $`bunx expo export --platform web --output-dir ${destination}`.lines()) {
-		stdout.write(line + "\n");
+		await stdout.write(`${line}\n`);
 		if (line.includes("Exported:")) break;
 	}
 
