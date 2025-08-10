@@ -11,6 +11,19 @@ export interface Todo {
 	updated_at: number;
 }
 
+// CR-SQLite change object interface
+export interface CRSQLChange {
+	table: string;
+	pk: string | Uint8Array;
+	cid: string;
+	val: unknown;
+	col_version: number;
+	db_version: number;
+	site_id: Uint8Array;
+	cl: number;
+	seq: number;
+}
+
 export const initDatabase = async (): Promise<DB> => {
 	if (db) return db;
 
@@ -96,15 +109,15 @@ export const deleteTodo = async (id: string): Promise<void> => {
 };
 
 // Sync operations
-export const getChanges = async (sinceVersion: number = 0): Promise<any[]> => {
+export const getChanges = async (sinceVersion: number = 0): Promise<CRSQLChange[]> => {
 	const result = await getDatabase().execute(
 		`SELECT * FROM crsql_changes WHERE db_version > ?`,
 		[sinceVersion],
 	);
-	return result.rows || [];
+	return (result.rows || []) as CRSQLChange[];
 };
 
-export const applyChanges = async (changes: any[]): Promise<void> => {
+export const applyChanges = async (changes: CRSQLChange[]): Promise<void> => {
 	const db = getDatabase();
 	await db.transaction(async (tx) => {
 		for (const change of changes) {
