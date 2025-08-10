@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import crsqlite from "@vlcn.io/crsqlite-allinone";
+import crsqlite from "@vlcn.io-community/crsqlite-allinone";
 import { extensionPath } from "@vlcn.io/crsqlite";
 // @ts-ignore
 import SQLite from "better-sqlite3";

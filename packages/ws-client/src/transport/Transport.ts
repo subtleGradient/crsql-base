@@ -3,7 +3,7 @@ import {
   Changes,
   RejectChanges,
   StartStreaming,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 
 export type TransporOptions = {
   url: string;

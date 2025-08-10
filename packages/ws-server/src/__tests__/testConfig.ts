@@ -1,4 +1,4 @@
-import { cryb64 } from "@vlcn.io/ws-common";
+import { cryb64 } from "@vlcn.io-community/ws-common";
 import { Config } from "../config.js";
 
 export const config: Config = {

@@ -4,7 +4,7 @@ import TestConfig from "../config/TestConfig";
 import DBCache from "../private/DBCache";
 import ServiceDB from "../private/ServiceDB";
 import FSNotify from "../private/FSNotify";
-import { Change, tags } from "@vlcn.io/direct-connect-common";
+import { Change, tags } from "@vlcn.io-community/direct-connect-common";
 import util from "../private/util";
 
 test("constructing", () => {

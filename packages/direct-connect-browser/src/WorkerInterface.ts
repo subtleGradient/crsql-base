@@ -4,8 +4,8 @@ import {
   StartSyncMsg,
   SyncedRemoteMsg,
 } from "./Types";
-import { DBID } from "@vlcn.io/xplat-api";
-import tblrx, { Src } from "@vlcn.io/rx-tbl";
+import { DBID } from "@vlcn.io-community/xplat-api";
+import tblrx, { Src } from "@vlcn.io-community/rx-tbl";
 
 type AsUrls<T> = {
   [Property in keyof T]: T[Property] extends undefined | URL ? undefined : URL;

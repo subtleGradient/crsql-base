@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/sync-p2p",
+  "name": "@vlcn.io-community/sync-p2p",
   "type": "module",
   "version": "0.14.0",
   "files": [
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/uuid": "^9.0.1",
-    "@vlcn.io/xplat-api": "workspace:*",
+    "@vlcn.io-community/xplat-api": "workspace:*",
     "peerjs": "^1.4.7",
     "uuid": "^9.0.0"
   },

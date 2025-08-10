@@ -1,4 +1,4 @@
-import { Config } from "@vlcn.io/ws-server";
+import { Config } from "@vlcn.io-community/ws-server";
 
 export const config = Object.freeze({
   dbFolder: "./test_fs/dbs",

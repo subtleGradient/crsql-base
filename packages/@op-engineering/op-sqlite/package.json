@@ -1,0 +1,8 @@
+{
+  "name": "@op-engineering/op-sqlite",
+  "version": "0.0.1-fake",
+  "description": "Fake package to prevent hoisting of real @op-engineering/op-sqlite",
+  "main": "index.js",
+  "private": true,
+  "type": "module"
+}

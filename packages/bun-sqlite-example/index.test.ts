@@ -8,10 +8,10 @@ let isSQLiteAvailable = false;
 let extensionPath: string | undefined;
 
 try {
-  const sqliteLib = await import("@vlcn.io/bun-sqlite-lib");
+  const sqliteLib = await import("@vlcn.io-community/bun-sqlite-lib");
   isSQLiteAvailable = sqliteLib.isSQLiteAvailable();
 } catch (e) {
-  console.log("Note: @vlcn.io/bun-sqlite-lib not available, skipping tests");
+  console.log("Note: @vlcn.io-community/bun-sqlite-lib not available, skipping tests");
 }
 
 try {
@@ -29,7 +29,7 @@ describe.skipIf(!testsEnabled)("bun-sqlite-example", () => {
 
   beforeAll(async () => {
     // Set the bundled SQLite before any Database instances are created
-    const { setBundledSQLite } = await import("@vlcn.io/bun-sqlite-lib");
+    const { setBundledSQLite } = await import("@vlcn.io-community/bun-sqlite-lib");
     setBundledSQLite();
   });
 
@@ -107,7 +107,7 @@ if (!testsEnabled) {
   it("Prerequisites not available", () => {
     console.log("Skipping tests - SQLite library or cr-sqlite extension not available");
     console.log("To run these tests, ensure:");
-    console.log("  1. @vlcn.io/libsqlite3-darwin-arm64 or -x64 is installed with dylib");
+    console.log("  1. @vlcn.io-community/libsqlite3-darwin-arm64 or -x64 is installed with dylib");
     console.log("  2. @vlcn.io/crsqlite is built and available");
     expect(true).toBe(true);
   });

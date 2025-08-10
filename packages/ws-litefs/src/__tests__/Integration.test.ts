@@ -1,8 +1,8 @@
 import { test, expect, vi, afterAll } from "vitest";
 import { createLiteFSWriteService } from "../LiteFSWriteService";
 
-import { Config, Config as ServerConfig } from "@vlcn.io/ws-server";
-import { internal } from "@vlcn.io/ws-server";
+import { Config, Config as ServerConfig } from "@vlcn.io-community/ws-server";
+import { internal } from "@vlcn.io-community/ws-server";
 import { LiteFSDBFactory, createLiteFSDBFactory } from "../LiteFSDBFactory";
 import fs from "fs";
 

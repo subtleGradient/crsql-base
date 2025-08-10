@@ -4,11 +4,11 @@ import {
   StreamingChangesMsg,
   hexToBytes,
   tags,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 import { Endpoints } from "../Types";
 import { DB, RECEIVE, Version } from "./DB";
 import Fetcher from "./Fetcher";
-import { TXAsync } from "@vlcn.io/xplat-api";
+import { TXAsync } from "@vlcn.io-community/xplat-api";
 
 export default class InboundStream {
   // TODO: can we apply back-pressure so the server doesn't overwhelm us with sync events?

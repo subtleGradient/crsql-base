@@ -1,24 +1,26 @@
 {
-  "private": true,
-  "version": "0.0.0",
-  "workspaces": [
-    "packages/*",
-    "tsbuild-all"
-  ],
-  "engines": {
-    "node": ">=19"
-  },
-  "dependencies": {
-    "@changesets/cli": "^2.29.5",
-    "@vlcn.io/crsqlite": "0.16.3"
-  },
-  "name": "cr-sqlite-js",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "^1.2.19"
-  },
-  "peerDependencies": {
-    "typescript": "^5.9.2"
-  }
+	"private": true,
+	"version": "0.0.0",
+	"workspaces": [
+		"packages/*",
+		"packages/@op-engineering/op-sqlite",
+		"packages/@react-native/react-native",
+		"tsbuild-all"
+	],
+	"engines": {
+		"node": ">=19"
+	},
+	"dependencies": {
+		"@changesets/cli": "^2.29.5",
+		"@vlcn.io/crsqlite": "0.16.3"
+	},
+	"name": "cr-sqlite-js",
+	"module": "index.ts",
+	"type": "module",
+	"devDependencies": {
+		"@types/bun": "^1.2.19"
+	},
+	"peerDependencies": {
+		"typescript": "^5.9.2"
+	}
 }

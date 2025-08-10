@@ -4,7 +4,7 @@ import { Config } from "./config.js";
 import path from "node:path";
 import fs from "node:fs";
 import { extensionPath } from "@vlcn.io/crsqlite";
-import { Change, cryb64 } from "@vlcn.io/ws-common";
+import { Change, cryb64 } from "@vlcn.io-community/ws-common";
 import { throttle } from "throttle-debounce";
 import FSNotify from "./fs/FSNotify.js";
 import touchHack from "./fs/touchHack.js";

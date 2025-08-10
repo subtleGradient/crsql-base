@@ -1,4 +1,4 @@
-# @vlcn.io/rx-query
+# @vlcn.io-community/rx-query
 
 WIP - more efficient query based reactivity.
 

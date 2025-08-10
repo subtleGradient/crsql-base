@@ -1,4 +1,4 @@
-# @vlcn.io/ws-server
+# @vlcn.io-community/ws-server
 
 # Basic Setup
 

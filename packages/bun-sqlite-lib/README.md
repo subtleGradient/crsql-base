@@ -1,11 +1,11 @@
-# @vlcn.io/bun-sqlite-lib
+# @vlcn.io-community/bun-sqlite-lib
 
 SQLite library loader for Bun with extension support. Provides a bundled SQLite library with extension loading enabled, bypassing Apple's system SQLite which has extensions disabled.
 
 ## Installation
 
 ```bash
-bun add @vlcn.io/bun-sqlite-lib
+bun add @vlcn.io-community/bun-sqlite-lib
 ```
 
 This will automatically install the correct platform-specific SQLite library based on your system.
@@ -13,7 +13,7 @@ This will automatically install the correct platform-specific SQLite library bas
 ## Usage
 
 ```typescript
-import { setBundledSQLite } from '@vlcn.io/bun-sqlite-lib';
+import { setBundledSQLite } from '@vlcn.io-community/bun-sqlite-lib';
 import { Database } from 'bun:sqlite';
 
 // MUST be called before creating any Database instances

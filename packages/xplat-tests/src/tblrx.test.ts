@@ -1,6 +1,6 @@
-import { DBAsync, UpdateType, UPDATE_TYPE } from "@vlcn.io/xplat-api";
+import { DBAsync, UpdateType, UPDATE_TYPE } from "@vlcn.io-community/xplat-api";
 type DB = DBAsync;
-import tblrx from "@vlcn.io/rx-tbl";
+import tblrx from "@vlcn.io-community/rx-tbl";
 
 function createSimpleSchema(db: DB) {
   return db.execMany([

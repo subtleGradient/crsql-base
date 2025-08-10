@@ -1,4 +1,4 @@
-# @vlcn.io/react
+# @vlcn.io-community/react
 
 In progress React integration. While we've gotten it to allowing ~100 SQLite queries to resolve in a single frame @ 60fps, there's still work to do on making the reactivity smarter and fine-grained.
 

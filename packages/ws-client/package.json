@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/ws-client",
+  "name": "@vlcn.io-community/ws-client",
   "type": "module",
   "version": "0.2.0",
   "files": [
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/throttle-debounce": "^5.0.0",
-    "@vlcn.io/ws-common": "workspace:*"
+    "@vlcn.io-community/ws-common": "workspace:*"
   },
   "devDependencies": {
     "vitest": "^3.2.4"

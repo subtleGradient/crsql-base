@@ -11,7 +11,7 @@ import {
   GetLastSeenResponse,
   Seq,
   tags,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 import DB from "./private/DB.js";
 
 /**

@@ -1,4 +1,4 @@
-# @vlcn.io/crsqlite-wasm
+# @vlcn.io-community/crsqlite-wasm
 
 WASM build of `sqlite` that can:
 

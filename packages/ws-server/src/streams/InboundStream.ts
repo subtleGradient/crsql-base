@@ -1,4 +1,4 @@
-import { Changes, greaterThanOrEqual, tags } from "@vlcn.io/ws-common";
+import { Changes, greaterThanOrEqual, tags } from "@vlcn.io-community/ws-common";
 import DB, { IDB } from "../DB.js";
 import Transport from "../Trasnport.js";
 

@@ -1,7 +1,7 @@
 import * as nanoid from "nanoid";
 import sqlite from "../index.js";
 import { test } from "vitest";
-import { DB } from "@vlcn.io/xplat-api";
+import { DB } from "@vlcn.io-community/xplat-api";
 
 type SiteIDWire = string;
 type CID = string;

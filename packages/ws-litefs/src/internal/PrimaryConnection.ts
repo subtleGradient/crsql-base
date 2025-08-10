@@ -5,11 +5,11 @@ import {
   CreateDbOnPrimaryResponse,
   ApplyChangesOnPrimaryResponse,
   tags,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import { PrimarySocket } from "./PrimarySocket.js";
 import path from "path";
 import { litefsPrimaryPath } from "../config.js";
-import { Config } from "@vlcn.io/ws-server";
+import { Config } from "@vlcn.io-community/ws-server";
 
 let nextRequestId = 0;
 

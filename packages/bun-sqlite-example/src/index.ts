@@ -1,4 +1,4 @@
-import { setBundledSQLite } from "@vlcn.io/bun-sqlite-lib";
+import { setBundledSQLite } from "@vlcn.io-community/bun-sqlite-lib";
 import { Database } from "bun:sqlite";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";

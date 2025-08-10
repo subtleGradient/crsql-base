@@ -5,7 +5,7 @@ import {
   tags,
   Seq,
   bytesToHex,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 import DB from "./DB.js";
 import FSNotify from "./FSNotify.js";
 import ServiceDB from "./ServiceDB.js";

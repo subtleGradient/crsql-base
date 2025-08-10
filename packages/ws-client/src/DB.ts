@@ -1,4 +1,4 @@
-import { Change } from "@vlcn.io/ws-common";
+import { Change } from "@vlcn.io-community/ws-common";
 
 export interface DB {
   readonly siteid: Uint8Array;

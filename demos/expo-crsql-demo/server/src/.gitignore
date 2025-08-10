@@ -1,0 +1,2 @@
+.expo-web-build/*
+!.expo-web-build/index.html

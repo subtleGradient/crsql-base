@@ -1,6 +1,6 @@
 import { test, expect, afterAll } from "vitest";
 import { config } from "./testServerConfig.js";
-import { Config, internal } from "@vlcn.io/ws-server";
+import { Config, internal } from "@vlcn.io-community/ws-server";
 import { util, waitUntil } from "../internal/util.js";
 import fs from "fs";
 

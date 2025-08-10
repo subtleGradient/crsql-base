@@ -3,10 +3,10 @@ import {
   bytesToHex,
   tags,
   uintArraysEqual,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import DB, { IDB } from "../DB.js";
 import Transport from "../Trasnport.js";
-import { logger } from "@vlcn.io/logger-provider";
+import { logger } from "@vlcn.io-community/logger-provider";
 
 /**
  * Listens to the local db and sends out a stream

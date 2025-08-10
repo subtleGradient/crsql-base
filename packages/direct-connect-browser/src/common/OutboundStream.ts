@@ -1,4 +1,4 @@
-import { ISerializer, hexToBytes, tags } from "@vlcn.io/direct-connect-common";
+import { ISerializer, hexToBytes, tags } from "@vlcn.io-community/direct-connect-common";
 import { Endpoints } from "../Types.js";
 import { DB, Seq } from "./DB.js";
 import Fetcher from "./Fetcher.js";

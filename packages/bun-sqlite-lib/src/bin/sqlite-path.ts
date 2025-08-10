@@ -19,7 +19,7 @@ switch (command) {
     } else {
       console.error('❌ SQLite library not found');
       console.error('Install the platform-specific package:');
-      console.error(`  npm install @vlcn.io/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`);
+      console.error(`  npm install @vlcn.io-community/libsqlite3-darwin-${process.arch === 'arm64' ? 'arm64' : 'x64'}`);
       process.exit(1);
     }
     break;

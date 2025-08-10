@@ -5,7 +5,7 @@ import util from "../util.js";
 import SQLiteDB from "better-sqlite3";
 import FSNotify from "../FSNotify.js";
 import ServiceDB from "../ServiceDB.js";
-import { bytesToHex } from "@vlcn.io/direct-connect-common";
+import { bytesToHex } from "@vlcn.io-community/direct-connect-common";
 
 test("writes to the database notify fs listeners", async () => {
   const uuid = crypto.randomUUID();

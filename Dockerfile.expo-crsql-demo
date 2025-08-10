@@ -1,0 +1,52 @@
+# ---- build: install + export web (monorepo-aware) ----
+FROM oven/bun:1.2.19 AS build
+WORKDIR /workspace
+
+# Install Python and build tools for native dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy lockfile + root manifest first for better caching
+COPY demos/expo-crsql-demo/bun.lock demos/expo-crsql-demo/package.json ./
+
+# Copy the whole monorepo (simplest + robust for workspaces)
+# If you want faster builds, replace this with targeted COPY lines
+# for only the workspaces used by demos/expo-crsql-demo.
+COPY . .
+
+# Skip Cypress and SQLite binary downloads
+ENV CYPRESS_INSTALL_BINARY=0
+ENV BETTER_SQLITE3_SKIP_DOWNLOAD=1
+
+# Install only the needed workspace(s) and their deps
+# Skip postinstall scripts to avoid hanging builds
+RUN cd demos/expo-crsql-demo && \
+    bun install --ignore-scripts
+
+# Build-time env for Expo static replacement
+ARG EXPO_NO_TELEMETRY=1
+ENV EXPO_NO_TELEMETRY=$EXPO_NO_TELEMETRY
+# Set NODE_ENV for build stage to avoid directory check issue
+ENV NODE_ENV=development
+
+# Export the Expo web bundle from the workspace
+RUN cd demos/expo-crsql-demo && \
+    mkdir -p build/expo && \
+    bun run build:web
+
+# ---- runtime: single Bun image serving static + API ----
+FROM oven/bun:1.2.19-alpine AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Copy only the built artifacts
+COPY --from=build /workspace/demos/expo-crsql-demo/build /app
+
+EXPOSE 3000
+HEALTHCHECK --interval=10s --timeout=2s --start-period=10s --retries=6 \
+  CMD wget -qO- http://127.0.0.1:3000/up || exit 1
+
+CMD ["bun", "server.js"]

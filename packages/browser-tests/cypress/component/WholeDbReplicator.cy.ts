@@ -1,8 +1,8 @@
-import { wdbTests } from "@vlcn.io/xplat-tests";
-import sqliteWasm from "@vlcn.io/crsqlite-wasm";
+import { wdbTests } from "@vlcn.io-community/xplat-tests";
+import sqliteWasm from "@vlcn.io-community/crsqlite-wasm";
 
 // @ts-ignore
-import wasmUrl from "@vlcn.io/crsqlite-wasm/crsqlite.wasm?url";
+import wasmUrl from "@vlcn.io-community/crsqlite-wasm/crsqlite.wasm?url";
 
 const crsqlite = await sqliteWasm((file) => wasmUrl);
 

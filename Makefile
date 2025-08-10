@@ -24,8 +24,10 @@ $(tsbuildinfo): $(node-deps) $(wasm-file) FORCE
 $(native-ext): $(node-deps) FORCE
 	cd node_modules/@vlcn.io/crsqlite && make loadable
 
-test: $(tsbuildinfo) $(wasm-file) $(native-ext) FORCE
+test-all: $(tsbuildinfo) $(wasm-file) $(native-ext) FORCE
 	./test.sh
+
+test: test-all
 
 clean:
 	git clean -xfd
@@ -33,4 +35,4 @@ clean:
 
 FORCE:
 
-.PHONY: all test clean
+.PHONY: all test test-all clean

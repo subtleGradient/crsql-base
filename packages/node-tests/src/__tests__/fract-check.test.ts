@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import crsqlite from "@vlcn.io/crsqlite-allinone";
+import crsqlite from "@vlcn.io-community/crsqlite-allinone";
 import fc from "fast-check";
 
 function setupDb() {
@@ -42,7 +42,7 @@ test("prepend append", () => {
 
         let actual = db
           .execA("SELECT id FROM todo ORDER BY ordering")
-          .map((r) => r[0]);
+          .map((r: unknown[]) => r[0]);
         expect(actual).toEqual(expected);
       }
     )

@@ -1,4 +1,4 @@
-import { UpdateType, DBID } from "@vlcn.io/xplat-api";
+import { UpdateType, DBID } from "@vlcn.io-community/xplat-api";
 
 export type Endpoints = {
   createOrMigrate: string;

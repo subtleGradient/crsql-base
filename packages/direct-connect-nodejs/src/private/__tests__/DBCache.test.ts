@@ -3,7 +3,7 @@ import DBCache from "../DBCache";
 import TestConfig from "../../config/TestConfig";
 import util from "../util";
 import ServiceDB from "../ServiceDB";
-import { bytesToHex } from "@vlcn.io/direct-connect-common";
+import { bytesToHex } from "@vlcn.io-community/direct-connect-common";
 
 test("cache evicts", () => {
   vi.useFakeTimers();

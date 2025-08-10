@@ -1,8 +1,8 @@
-import { Config } from "@vlcn.io/ws-server";
+import { Config } from "@vlcn.io-community/ws-server";
 import logger from "./logger.js";
 import fs from "fs";
 import path from "path";
-import { internal } from "@vlcn.io/ws-server";
+import { internal } from "@vlcn.io-community/ws-server";
 
 /**
  * Custom FSNotification library to deal with LiteFS secondaries.

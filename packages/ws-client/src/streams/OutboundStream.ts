@@ -1,4 +1,4 @@
-import { StartStreaming, tags } from "@vlcn.io/ws-common";
+import { StartStreaming, tags } from "@vlcn.io-community/ws-common";
 import { Transport } from "../transport/Transport.js";
 import { DB } from "../DB.js";
 

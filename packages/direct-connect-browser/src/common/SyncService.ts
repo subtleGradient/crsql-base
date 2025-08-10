@@ -1,4 +1,4 @@
-import { SerializerFactory } from "@vlcn.io/direct-connect-common";
+import { SerializerFactory } from "@vlcn.io-community/direct-connect-common";
 import { Port, StartSyncMsg, StopSyncMsg } from "../Types.js";
 import createSyncedDB, { SyncedDB } from "./SyncedDB.js";
 

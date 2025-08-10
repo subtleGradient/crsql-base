@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/libsqlite3-darwin-x64",
+  "name": "@vlcn.io-community/libsqlite3-darwin-x64",
   "version": "3.47.2",
   "description": "Prebuilt SQLite 3.47.2 with extension loading enabled for macOS x64",
   "repository": {

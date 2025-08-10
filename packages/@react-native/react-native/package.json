@@ -1,0 +1,7 @@
+{
+  "name": "react-native",
+  "version": "0.0.0-fake",
+  "description": "Fake package to block react-native hoisting to root",
+  "private": true,
+  "main": "index.js"
+}

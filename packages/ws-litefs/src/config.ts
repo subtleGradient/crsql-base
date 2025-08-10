@@ -1,4 +1,4 @@
-import { Config } from "@vlcn.io/ws-server";
+import { Config } from "@vlcn.io-community/ws-server";
 import path from "path";
 
 export function litefsPrimaryPath(config: Config) {

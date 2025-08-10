@@ -8,7 +8,7 @@ import {
   CreateDbOnPrimary,
   ApplyChangesOnPrimary,
   Err,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import logger from "../logger.js";
 
 export class PrimarySocket {

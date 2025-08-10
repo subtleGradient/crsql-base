@@ -2,7 +2,7 @@ import schemaContent from "./schemas/main.sql?raw";
 import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import "./index.css";
-import { DBProvider } from "@vlcn.io/react";
+import { DBProvider } from "@vlcn.io-community/react";
 import React from "react";
 
 const hash = parseHash();

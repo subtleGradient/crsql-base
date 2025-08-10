@@ -2,7 +2,7 @@
 // loaded into node.
 // clobber below with whatever you need to debug today.
 
-import crsqlite from "@vlcn.io/crsqlite-allinone";
+import crsqlite from "@vlcn.io-community/crsqlite-allinone";
 
 const db = crsqlite.open();
 db.exec(`CREATE TABLE IF NOT EXISTS data (id NUMBER PRIMARY KEY not null)`);

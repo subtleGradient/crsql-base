@@ -1,4 +1,4 @@
-import { WorkerInterface } from "@vlcn.io/ws-client";
+import { WorkerInterface } from "@vlcn.io-community/ws-client";
 import { useEffect } from "react";
 
 // hook to start syncing a DB

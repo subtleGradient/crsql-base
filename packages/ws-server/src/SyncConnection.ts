@@ -3,12 +3,12 @@ import {
   Changes,
   RejectChanges,
   bytesToHex,
-} from "@vlcn.io/ws-common";
+} from "@vlcn.io-community/ws-common";
 import DBCache from "./DBCache.js";
 import OutboundStream from "./streams/OutboundStream.js";
 import InboundStream from "./streams/InboundStream.js";
 import Transport from "./Trasnport.js";
-import { logger } from "@vlcn.io/logger-provider";
+import { logger } from "@vlcn.io-community/logger-provider";
 import { IDB } from "./DB.js";
 
 /**

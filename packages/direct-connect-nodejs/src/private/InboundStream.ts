@@ -1,7 +1,7 @@
 import {
   AckChangesMsg,
   StreamingChangesMsg,
-} from "@vlcn.io/direct-connect-common";
+} from "@vlcn.io-community/direct-connect-common";
 
 /**
  * Takes the results of an outbound stream and

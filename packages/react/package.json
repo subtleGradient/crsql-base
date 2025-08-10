@@ -1,5 +1,5 @@
 {
-  "name": "@vlcn.io/react",
+  "name": "@vlcn.io-community/react",
   "type": "module",
   "version": "3.1.0",
   "files": [
@@ -27,10 +27,10 @@
     "directory": "https://github.com/vlcn-io/js/tree/main/js/react"
   },
   "dependencies": {
-    "@vlcn.io/crsqlite-wasm": "workspace:*",
-    "@vlcn.io/rx-tbl": "workspace:*",
-    "@vlcn.io/ws-client": "workspace:*",
-    "@vlcn.io/xplat-api": "workspace:*",
+    "@vlcn.io-community/crsqlite-wasm": "workspace:*",
+    "@vlcn.io-community/rx-tbl": "workspace:*",
+    "@vlcn.io-community/ws-client": "workspace:*",
+    "@vlcn.io-community/xplat-api": "workspace:*",
     "@vlcn.io/typed-sql": "^0.3.0",
     "async-mutex": "^0.4.0"
   },

@@ -1,4 +1,4 @@
-import { DBAsync, StmtAsync, TXAsync } from "@vlcn.io/xplat-api";
+import { DBAsync, StmtAsync, TXAsync } from "@vlcn.io-community/xplat-api";
 import { computeCacheKey } from "./cache.js";
 import { serialize } from "./serialize.js";
 import * as SQLite from "@vlcn.io/wa-sqlite";

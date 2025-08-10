@@ -1,4 +1,4 @@
-import { Config, internal } from "@vlcn.io/ws-server";
+import { Config, internal } from "@vlcn.io-community/ws-server";
 import fs from "fs";
 import logger from "../logger.js";
 

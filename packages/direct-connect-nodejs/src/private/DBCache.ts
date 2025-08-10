@@ -1,4 +1,4 @@
-import { bytesToHex, hexToBytes } from "@vlcn.io/direct-connect-common";
+import { bytesToHex, hexToBytes } from "@vlcn.io-community/direct-connect-common";
 import { Config } from "../Types.js";
 import DB from "./DB.js";
 import { SchemaRow } from "./ServiceDB.js";

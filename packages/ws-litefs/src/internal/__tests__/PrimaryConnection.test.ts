@@ -2,7 +2,7 @@ import { test, expect } from "vitest";
 import { createPrimaryConnection } from "../PrimaryConnection.js";
 import fs from "fs";
 import net from "net";
-import { Config } from "@vlcn.io/ws-server";
+import { Config } from "@vlcn.io-community/ws-server";
 
 const testConfig: Config = {
   dbFolder: "./test_fs/",

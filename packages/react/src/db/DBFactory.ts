@@ -1,5 +1,5 @@
-import initWasm, { SQLite3 } from "@vlcn.io/crsqlite-wasm";
-import tblrx from "@vlcn.io/rx-tbl";
+import initWasm, { SQLite3 } from "@vlcn.io-community/crsqlite-wasm";
+import tblrx from "@vlcn.io-community/rx-tbl";
 import { CtxAsync } from "../context.js";
 import { Mutex } from "async-mutex";
 

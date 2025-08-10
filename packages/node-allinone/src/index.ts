@@ -1,6 +1,6 @@
 // @ts-ignore
 import Database from "better-sqlite3";
-import { DB as IDB, Stmt as IStmt, UpdateType } from "@vlcn.io/xplat-api";
+import { DB as IDB, Stmt as IStmt, UpdateType } from "@vlcn.io-community/xplat-api";
 import { extensionPath } from "@vlcn.io/crsqlite";
 
 const api = {

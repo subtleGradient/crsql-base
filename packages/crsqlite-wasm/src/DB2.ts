@@ -1,4 +1,4 @@
-import { DBAsync } from "@vlcn.io/xplat-api";
+import { DBAsync } from "@vlcn.io-community/xplat-api";
 import { Mutex } from "async-mutex";
 import { SQLITE_UTF8 } from "@vlcn.io/wa-sqlite";
 

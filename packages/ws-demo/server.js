@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as http from "http";
-import { attachWebsocketServer } from "@vlcn.io/ws-server";
+import { attachWebsocketServer } from "@vlcn.io-community/ws-server";
 import express from "express";
 
 const port = process.env.PORT || 8080;

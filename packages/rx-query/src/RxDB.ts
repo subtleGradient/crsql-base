@@ -4,7 +4,7 @@ import {
   UPDATE_TYPE,
   UpdateType,
   TXAsync,
-} from "@vlcn.io/xplat-api";
+} from "@vlcn.io-community/xplat-api";
 import LiveQuery from "./LiveQuery";
 
 // wraps a normal DB in a reactive version

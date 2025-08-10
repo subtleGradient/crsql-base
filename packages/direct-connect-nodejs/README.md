@@ -1,4 +1,4 @@
-# @vlcn.io/direct-connect-nodejs
+# @vlcn.io-community/direct-connect-nodejs
 
 Libraries for facilitating direct connect sync from nodejs.
 
@@ -14,7 +14,7 @@ import {
   SyncService,
   jsonDecode,
   jsonEncode,
-} from "@vlcn.io/direct-connect-nodejs";
+} from "@vlcn.io-community/direct-connect-nodejs";
 const svcDb = new ServiceDB(DefaultConfig, true);
 const cache = new DBCache(DefaultConfig, svcDb.defaultSchemaProvider);
 let svc = new SyncService(DefaultConfig, cache, svcDb);
