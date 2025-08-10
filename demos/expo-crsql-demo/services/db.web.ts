@@ -23,34 +23,54 @@ export class SuspenseDB implements DB {
 	}
 
 	async execute(sql: string, params?: unknown[]): Promise<{ rows: any[] }> {
-		const db = await this.dbPromise;
-		const result = await db.execO(sql, params || []);
-		return { rows: result };
+		try {
+			const db = await this.dbPromise;
+			const result = await db.execO(sql, params || []);
+			return { rows: result };
+		} catch (error) {
+			console.error('[db.web] Execute failed:', { sql, error: error instanceof Error ? error.message : 'Unknown error' });
+			throw new Error(`Database operation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+		}
 	}
 
 	async transaction<T>(fn: (tx: DB) => Promise<T>): Promise<T> {
-		const db = await this.dbPromise;
-		return await db.tx(async (innerTx: any) => {
-			const txWrapper: DB = {
-				execute: async (sql: string, params?: unknown[]) => {
-					const result = await innerTx.execO(sql, params || []);
-					return { rows: result };
-				},
-				transaction: async (innerFn) => {
-					// Nested transactions just execute in the same transaction
-					return innerFn(txWrapper);
-				},
-				close: () => {
-					// No-op for transaction
-				},
-			};
-			return fn(txWrapper);
-		});
+		try {
+			const db = await this.dbPromise;
+			return await db.tx(async (innerTx: any) => {
+				const txWrapper: DB = {
+					execute: async (sql: string, params?: unknown[]) => {
+						try {
+							const result = await innerTx.execO(sql, params || []);
+							return { rows: result };
+						} catch (error) {
+							console.error('[db.web] Transaction execute failed:', { sql, error });
+							throw error;
+						}
+					},
+					transaction: async (innerFn) => {
+						// Nested transactions just execute in the same transaction
+						return innerFn(txWrapper);
+					},
+					close: () => {
+						// No-op for transaction
+					},
+				};
+				return fn(txWrapper);
+			});
+		} catch (error) {
+			console.error('[db.web] Transaction failed:', error);
+			throw new Error(`Database transaction failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+		}
 	}
 
 	async close(): Promise<void> {
-		const db = await this.dbPromise;
-		db.close();
+		try {
+			const db = await this.dbPromise;
+			db.close();
+		} catch (error) {
+			console.error('[db.web] Close failed:', error);
+			// Don't throw on close errors, just log them
+		}
 	}
 }
 
@@ -67,6 +87,9 @@ export async function ensureInitialized(): Promise<void> {
 		}).then((s) => {
 			sqlite3 = s;
 			console.debug("SQLite WASM initialized");
+		}).catch((error) => {
+			console.error('[db.web] Failed to initialize SQLite WASM:', error);
+			throw new Error(`SQLite WASM initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
 		});
 	}
 
@@ -80,12 +103,19 @@ export function open(options: { name: string; location?: string }): DB {
 	}
 
 	// Create new db promise that includes initialization
-	const dbPromise = ensureInitialized().then(() => {
-		if (!sqlite3) {
-			throw new Error("Failed to initialize SQLite WASM");
-		}
-		return sqlite3.open(options.name);
-	});
+	const dbPromise = ensureInitialized()
+		.then(() => {
+			if (!sqlite3) {
+				throw new Error("SQLite WASM not available after initialization");
+			}
+			return sqlite3.open(options.name);
+		})
+		.catch((error) => {
+			console.error('[db.web] Failed to open database:', { name: options.name, error });
+			// Remove from cache if opening failed
+			dbInstances.delete(options.name);
+			throw new Error(`Failed to open database "${options.name}": ${error instanceof Error ? error.message : 'Unknown error'}`);
+		});
 
 	dbInstances.set(options.name, dbPromise);
 	return new SuspenseDB(dbPromise);
@@ -93,7 +123,11 @@ export function open(options: { name: string; location?: string }): DB {
 
 // Start initialization on module load
 if (typeof window !== "undefined") {
-	ensureInitialized();
+	ensureInitialized().catch((error) => {
+		console.warn('[db.web] Background initialization failed, will retry on first use:', error);
+		// Reset promise so it can be retried
+		initPromise = null;
+	});
 }
 
 export type { DB };
