@@ -37,7 +37,9 @@ const expo = {
 			const file = Bun.file(fsPath);
 			if (!(await file.exists())) {
 				console.warn(404, fsPath);
-				return new Response("File not found", { status: 404 });
+				return new Response(
+					Bun.file(path.resolve(expoWebBuildRootPath, "index.html")),
+				);
 			}
 			return new Response(file);
 		} catch (cause) {
