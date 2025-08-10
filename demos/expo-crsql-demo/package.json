@@ -53,8 +53,24 @@
 		"eslint": "^9.25.0",
 		"eslint-config-expo": "~9.2.0"
 	},
-	"workspaces":[
-	  "../../packages/*"
+	"workspaces": [
+		"../../packages/bun-sqlite-lib",
+		"../../packages/direct-connect-browser",
+		"../../packages/direct-connect-common",
+		"../../packages/direct-connect-nodejs",
+		"../../packages/crsqlite-wasm",
+		"../../packages/id",
+		"../../packages/logger-provider",
+		"../../packages/p2p",
+		"../../packages/react",
+		"../../packages/rx-query",
+		"../../packages/rx-tbl",
+		"../../packages/ws-browserdb",
+		"../../packages/ws-client",
+		"../../packages/ws-common",
+		"../../packages/ws-litefs",
+		"../../packages/ws-server",
+		"../../packages/xplat-api"
 	],
 	"private": true,
 	"op-sqlite": {
