@@ -52,6 +52,8 @@
           ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             # iOS development tools
             cocoapods
+            # Required for Rust builds on macOS
+            libiconv
           ]
           ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
             # Linux specific tools for Cypress
@@ -81,6 +83,13 @@
           echo "  4. Run tests: ./test.sh"
           echo ""
 
+          # Export library paths for Rust builds on macOS
+          ${pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+            export LIBRARY_PATH="${pkgs.libiconv}/lib:$LIBRARY_PATH"
+            export LDFLAGS="-L${pkgs.libiconv}/lib $LDFLAGS"
+            export CPPFLAGS="-I${pkgs.libiconv}/include $CPPFLAGS"
+          ''}
+
           # Set up Rust nightly if not already configured
           if ! rustup show | grep -q "nightly"; then
             echo "📦 Setting up Rust nightly toolchain..."
@@ -99,26 +108,26 @@
             export CYPRESS_RUN_BINARY=${pkgs.chromium}/bin/chromium
           ''}
 
-          # Preserve existing Xcode setup on macOS
-          if [[ "${system}" == "aarch64-darwin" ]]; then
-            # Save current xcode-select path before Nix potentially overrides it
-            ORIGINAL_DEVELOPER_DIR=$(xcode-select -p 2>/dev/null || echo "")
+          # # Preserve existing Xcode setup on macOS
+          # if [[ "${system}" == "aarch64-darwin" ]]; then
+          #   # Save current xcode-select path before Nix potentially overrides it
+          #   ORIGINAL_DEVELOPER_DIR=$(xcode-select -p 2>/dev/null || echo "")
 
-            # If we have a valid Xcode installation, preserve it
-            if [[ -d "/Applications/Xcode.app" ]] || [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
-              # Prefer user's Xcode-beta if it exists
-              if [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
-                export DEVELOPER_DIR="$HOME/Applications/Xcode-beta.app/Contents/Developer"
-              elif [[ -d "/Applications/Xcode.app" ]]; then
-                export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
-              fi
+          #   # If we have a valid Xcode installation, preserve it
+          #   if [[ -d "/Applications/Xcode.app" ]] || [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
+          #     # Prefer user's Xcode-beta if it exists
+          #     if [[ -d "$HOME/Applications/Xcode-beta.app" ]]; then
+          #       export DEVELOPER_DIR="$HOME/Applications/Xcode-beta.app/Contents/Developer"
+          #     elif [[ -d "/Applications/Xcode.app" ]]; then
+          #       export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+          #     fi
 
-              # Put real Xcode tools first in PATH
-              export PATH="$DEVELOPER_DIR/usr/bin:$PATH"
+          #     # Put real Xcode tools first in PATH
+          #     export PATH="$DEVELOPER_DIR/usr/bin:$PATH"
 
-              echo "iOS Development: Using Xcode at $DEVELOPER_DIR"
-            fi
-          fi
+          #     echo "iOS Development: Using Xcode at $DEVELOPER_DIR"
+          #   fi
+          # fi
 
           # Set up Ruby gem paths
           export GEM_HOME="$PWD/.gems"
