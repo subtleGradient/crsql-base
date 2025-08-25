@@ -36,8 +36,8 @@ registry:
 
 # Configure builder setup.
 builder:
-  dockerfile: ../../../Dockerfile.expo-crsql-demo
-  context: ../../../
+  dockerfile: ../../Dockerfile.expo-crsql-demo
+  context: ../../
   arch: amd64
   # Pass in additional build args needed for your Dockerfile.
   # args:
