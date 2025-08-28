@@ -10,7 +10,21 @@ native-ext = ./node_modules/@vlcn.io/crsqlite/dist/crsqlite.dylib
 all: $(git-deps) $(wasm-file) $(tsbuildinfo) $(native-ext)
 
 $(git-deps):
-	git submodule update --init --recursive
+	@echo "Ensuring git submodules are initialized and up-to-date..."
+	@if [ ! -e deps/wa-sqlite/.git ] || [ ! -e deps/emsdk/.git ]; then \
+		echo "Initializing git submodules..."; \
+		git submodule update --init --recursive; \
+	else \
+		echo "Checking submodule status..."; \
+		git submodule status --recursive | grep -E '^[+-]' && { \
+			echo "Submodules are out of sync, updating..."; \
+			git submodule update --init --recursive; \
+		} || echo "Submodules are up-to-date."; \
+	fi
+	@echo "Verifying submodules are properly initialized..."
+	@[ -e deps/wa-sqlite/.git ] || { echo "ERROR: wa-sqlite submodule not initialized"; exit 1; }
+	@[ -e deps/emsdk/.git ] || { echo "ERROR: emsdk submodule not initialized"; exit 1; }
+	@echo "✓ All submodules verified and ready"
 
 $(node-deps): $(git-deps)
 	bun install
