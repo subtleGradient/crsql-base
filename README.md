@@ -102,8 +102,8 @@ See official docs or the `vite-starter`
 - **@vlcn.io-community/crsqlite-allinone** (`node-allinone`) - CR-SQLite loadable extension with bundled SQLite for Node.js/Deno
 - **@vlcn.io-community/crsqlite-wasm** - WASM build of CR-SQLite & SQLite for browser environments
 - **@vlcn.io-community/bun-sqlite-lib** - SQLite library loader for Bun with extension support
-- **@vlcn.io-community/libsqlite3-darwin-arm64** - Prebuilt SQLite 3.47.2 for macOS ARM64 (Node.js/Bun)
-- **@vlcn.io-community/libsqlite3-darwin-x64** - Prebuilt SQLite 3.47.2 for macOS x64 (Node.js/Bun)
+- **@vlcn.io-community/libsqlite3-darwin-arm64** - Prebuilt SQLite 3.50.0 for macOS ARM64 (Node.js/Bun)
+- **@vlcn.io-community/libsqlite3-darwin-x64** - Prebuilt SQLite 3.50.0 for macOS x64 (Node.js/Bun)
 
 ## Sync & Networking
 

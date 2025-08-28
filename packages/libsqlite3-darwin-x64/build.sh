@@ -2,16 +2,16 @@
 set -e
 
 # SQLite version
-SQLITE_VERSION="3.47.2"
+SQLITE_VERSION="3.50.0"
 SQLITE_YEAR="2024"
 
 # Download SQLite amalgamation if not present
 if [ ! -f sqlite3.c ]; then
   echo "Downloading SQLite $SQLITE_VERSION amalgamation..."
-  curl -L "https://www.sqlite.org/$SQLITE_YEAR/sqlite-amalgamation-3470200.zip" -o sqlite.zip
+  curl -L "https://www.sqlite.org/$SQLITE_YEAR/sqlite-amalgamation-3500000.zip" -o sqlite.zip
   unzip -o sqlite.zip
-  mv sqlite-amalgamation-3470200/* .
-  rm -rf sqlite-amalgamation-3470200 sqlite.zip
+  mv sqlite-amalgamation-3500000/* .
+  rm -rf sqlite-amalgamation-3500000 sqlite.zip
 fi
 
 echo "Building SQLite $SQLITE_VERSION for darwin-x64..."

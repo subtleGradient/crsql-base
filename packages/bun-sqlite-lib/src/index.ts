@@ -72,7 +72,7 @@ export function isSQLiteAvailable(): boolean {
 export function getSQLiteVersion(): string {
 	// This would be dynamically determined from the actual library
 	// For now, return the version we're targeting
-	return "3.47.2";
+	return "3.50.0";
 }
 
 /**
